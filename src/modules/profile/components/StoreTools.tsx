@@ -49,6 +49,7 @@ function BillPrinterCard() {
 /** Emails the store's data archive. The address is set on the server. */
 function BackupCard() {
   const mut = useMutation({ mutationFn: () => profileApi.emailBackup() });
+  const full = useMutation({ mutationFn: () => profileApi.runFullBackup() });
   return (
     <>
       <Text variant="h3" tone="primary" style={{ marginBottom: 12 }}>
@@ -81,6 +82,27 @@ function BackupCard() {
           {mut.isError && (
             <Text variant="caption" tone="danger">
               {apiErrorMessage(mut.error)}
+            </Text>
+          )}
+
+          <Text variant="body-sm" tone="secondary">
+            The server also makes a full backup every night. Run it now before
+            a risky change, or to check that backups are working.
+          </Text>
+          <Button
+            label="Run full backup now"
+            variant="secondary"
+            loading={full.isPending}
+            onPress={() => full.mutate()}
+          />
+          {full.isSuccess && (
+            <Text variant="caption" tone="success">
+              Backup completed: {full.data.destination}.
+            </Text>
+          )}
+          {full.isError && (
+            <Text variant="caption" tone="danger">
+              {apiErrorMessage(full.error)}
             </Text>
           )}
         </VStack>

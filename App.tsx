@@ -142,6 +142,8 @@ const linking = {
             path: "medguide",
             screens: {
               MedGuideSearch: "",
+              CatalogList: "catalogue",
+              CatalogForm: "catalogue/edit",
               MedicineDetail: ":id",
             },
           },

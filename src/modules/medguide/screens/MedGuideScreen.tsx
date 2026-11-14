@@ -45,6 +45,7 @@ export default function MedGuideScreen() {
     return () => clearTimeout(t);
   }, [search]);
 
+  const isAdmin = useAuthStore((s) => s.user?.role === "admin");
   const canOrder = useAuthStore((s) => s.hasPermission)(
     PERMISSIONS.PRODUCTS_MANAGE,
   );
@@ -97,6 +98,16 @@ export default function MedGuideScreen() {
       overline="MedGuide"
       title="Medicine guide"
       subtitle="Look up any medicine"
+      right={
+        isAdmin ? (
+          <Button
+            label="Manage catalogue"
+            variant="secondary"
+            size="sm"
+            onPress={() => navigation.navigate("CatalogList")}
+          />
+        ) : undefined
+      }
     >
       <View style={{ marginBottom: 12 }}>
         <TextField

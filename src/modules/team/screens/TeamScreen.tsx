@@ -223,7 +223,7 @@ function UserRow({ user, onPress }: { user: TeamUser; onPress: () => void }) {
  */
 function LimitsCard() {
   const { data } = useTeamLimits();
-  const isAdmin = useAuthStore((s) => s.isAdmin);
+  const isAdmin = useAuthStore((s) => s.user?.role === "admin");
 
   if (!isAdmin || !data) return null;
 

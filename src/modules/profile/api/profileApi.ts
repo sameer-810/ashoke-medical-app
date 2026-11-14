@@ -44,4 +44,12 @@ export const profileApi = {
     }>("/backup/email", undefined, { timeout: 180_000 });
     return res.data.data;
   },
+  /** Runs the nightly full backup now, to wherever the server sends it. */
+  runFullBackup: async () => {
+    const res = await apiClient.post<{
+      success: boolean;
+      data: { destination: string; fileName: string; sizeBytes: number };
+    }>("/backup/run", undefined, { timeout: 300_000 });
+    return res.data.data;
+  },
 };
