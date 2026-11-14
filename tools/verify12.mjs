@@ -1,6 +1,6 @@
 /**
- * Plusveda — Chromium verification of the 12 points in
- * Plusveda_Requirements_and_Issues.docx.
+ * Ashoke Medical — Chromium verification of the 12 points in
+ * Ashoke Medical_Requirements_and_Issues.docx.
  *
  * Drives the LOCAL Expo web build (so it tests the code as changed, not as
  * deployed) against the live Render backend. Every check ends in PASS/FAIL plus
@@ -489,7 +489,7 @@ async function p789() {
   const stamp = Date.now();
   await add.nth(0).fill("Limit");
   await add.nth(1).fill("Test");
-  await add.nth(2).fill(`limit${stamp}@medstock.demo`);
+  await add.nth(2).fill(`limit${stamp}@ashoke.demo`);
   await add.nth(3).fill("9876500001");
   // Throwaway member on a live tenant: unique per run, never a literal in the repo.
   await add.nth(4).fill(`Staff@${stamp}`);

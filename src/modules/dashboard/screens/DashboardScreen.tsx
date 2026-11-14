@@ -67,7 +67,7 @@ interface Attn {
  *    and it held four links. The sidebar already lists every one of them.
  *  - Ten metrics rendered as ten separate 104px cards, each with a coloured cap
  *    and a tinted icon bubble, in five different accent colours.
- *  - "GOOD EVENING / Hello, plusveda / Your pharmacy at a glance" spent roughly
+ *  - "GOOD EVENING / Hello, ashoke / Your pharmacy at a glance" spent roughly
  *    a fifth of a phone screen greeting someone who opens this app forty times
  *    a day to check what needs doing.
  *

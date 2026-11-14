@@ -52,8 +52,7 @@ jobs:
           CI: "1"
           # EXPO_PUBLIC_* are inlined into the JS bundle at export time, so they
           # must match the build profile's env.
-          EXPO_PUBLIC_API_URL: https://two3-jun26-medical-back.onrender.com/api/v1
-          EXPO_PUBLIC_SOCKET_URL: https://two3-jun26-medical-back.onrender.com
+          EXPO_PUBLIC_API_URL: https://SET-THE-API-ADDRESS.invalid/api/v1
         # --platform android only: Android is the live test target here.
         run: |
           eas update \

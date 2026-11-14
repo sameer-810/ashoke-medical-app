@@ -91,15 +91,15 @@ test("a failed write rejects and leaves the cursor where it was", async () => {
 
 test("an older schema is wiped so the rows are pulled again", async () => {
   await store.setMany([
-    ["medstock-cat:org:schema", "2"],
-    ["medstock-cat:org:cursor:stock", "far-along"],
-    ["medstock-cat:org:stock:1", JSON.stringify({ x: row(1) })],
+    ["ashoke-cat:org:schema", "2"],
+    ["ashoke-cat:org:cursor:stock", "far-along"],
+    ["ashoke-cat:org:stock:1", JSON.stringify({ x: row(1) })],
   ]);
   const cat = new LocalCatalog();
   await cat.hydrate("org");
   assert.equal(cat.getCursor("stock"), null);
   assert.equal(cat.counts().stock, 0);
-  assert.equal(store.data.get("medstock-cat:org:schema"), "3");
+  assert.equal(store.data.get("ashoke-cat:org:schema"), "3");
 });
 
 test("an unreadable store still hydrates, empty and ready to pull", async () => {

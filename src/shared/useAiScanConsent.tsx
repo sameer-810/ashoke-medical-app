@@ -57,7 +57,7 @@ export function useAiScanConsent() {
     <ConfirmDialog
       visible={resolver !== null}
       title="Read this photo with AI?"
-      message="To read the printed text on bills, medicine packs and cheques, Plusveda sends the photo to Google Gemini, an AI service run by Google. A photo can include names, addresses and bank details. Plusveda sends it only to read the text for you; see our privacy policy for details. If you choose Not now, you can still type the details in."
+      message="To read the printed text on bills, medicine packs and cheques, Ashoke Medical sends the photo to Google Gemini, an AI service run by Google. A photo can include names, addresses and bank details. Ashoke Medical sends it only to read the text for you; see our privacy policy for details. If you choose Not now, you can still type the details in."
       confirmLabel="Allow"
       cancelLabel="Not now"
       onConfirm={() => answer(true)}

@@ -15,7 +15,7 @@
  *
  *   credentials/signing.json
  *   {
- *     "storeFile": "../../credentials/plusveda-upload.keystore",
+ *     "storeFile": "../../credentials/ashoke-upload.keystore",
  *     "storePassword": "…",
  *     "keyAlias": "upload",
  *     "keyPassword": "…"

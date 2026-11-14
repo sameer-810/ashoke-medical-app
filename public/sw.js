@@ -18,8 +18,8 @@
  * The app preloads every chunk after sign-in and reports what it uses (see
  * navigation/lazyScreen.tsx), so the current cache really holds the whole app.
  */
-const CACHE = "medstock-shell-v1";
-const STATIC_PREFIX = "medstock-static-";
+const CACHE = "ashoke-shell-v1";
+const STATIC_PREFIX = "ashoke-static-";
 const SHELL_KEY = "__shell__";
 const PREVIOUS_SHELL_KEY = "__shell_previous__";
 const BUILDS_KEY = "__builds__";

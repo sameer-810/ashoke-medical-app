@@ -56,7 +56,7 @@ const MAX_LABELS = 300;
  * text. It fits BESIDE it:
  *
  *   +--------------------------------------+
- *   | [QR]  MedStock Demo Pharmacy         |
+ *   | [QR]  Ashoke Medical Stores         |
  *   | [QR]  HUMAN ACTRAPID 40IU VIAL...    |
  *   | [QR]  BATCH B-70955  EXP 03/28       |
  *   | [QR]  MRP Rs 18.13                   |

@@ -156,7 +156,7 @@ test("drafts are per org and per user", () => {
   assert.notEqual(draftKey("o1", "u1"), draftKey("o1", "u2"));
   assert.notEqual(draftKey("o1", "u1"), draftKey("o2", "u1"));
   assert.ok(isDraftKey(draftKey("o", "u")));
-  assert.equal(isDraftKey("medstock-cat:o:stock:1"), false);
+  assert.equal(isDraftKey("ashoke-cat:o:stock:1"), false);
 });
 
 test("the footer names the first thing to fix", () => {

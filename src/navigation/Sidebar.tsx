@@ -110,7 +110,7 @@ export function Sidebar({
             source={require("../../assets/brand/mark.png")}
             style={styles.mark}
             resizeMode="contain"
-            accessibilityLabel="Plusveda"
+            accessibilityLabel="Ashoke Medical"
           />
         ) : (
           <>
@@ -119,7 +119,7 @@ export function Sidebar({
                 source={require("../../assets/brand/wordmark.png")}
                 style={styles.wordmark}
                 resizeMode="contain"
-                accessibilityLabel="Plusveda"
+                accessibilityLabel="Ashoke Medical"
               />
               <Text variant="caption" tone="tertiary" numberOfLines={1}>
                 {organization?.name || "Inventory"}
@@ -340,12 +340,12 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
     borderRightColor: palette.border.default,
   },
-  /** Brand wordmark in the expanded sidebar (720x156 source → 4.6:1). */
+  /** Brand wordmark in the expanded sidebar (720x202 source → 3.56:1). */
   wordmark: {
-    width: 138,
-    height: 30,
+    width: 164,
+    height: 46,
   },
-  /** Compact "p" mark shown when the rail is collapsed. */
+  /** The square mark shown when the rail is collapsed. */
   mark: {
     width: 34,
     height: 34,

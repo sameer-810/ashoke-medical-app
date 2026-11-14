@@ -54,10 +54,10 @@ export function AuthLayout({ title, subtitle, children }: Props) {
                 source={require("../../../../assets/brand/mark.png")}
                 style={styles.brandMark}
                 resizeMode="contain"
-                accessibilityLabel="Plusveda"
+                accessibilityLabel="Ashoke Medical"
               />
               <Text variant="h2" tone="inverse">
-                Plusveda
+                Ashoke Medical
               </Text>
             </HStack>
 
@@ -83,7 +83,8 @@ export function AuthLayout({ title, subtitle, children }: Props) {
             </VStack>
 
             <Text variant="caption" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Multi-tenant SaaS · Permission-based access · Tamper-proof audit
+              Chemist &amp; Druggist · Permission-based access · Tamper-proof
+              audit
             </Text>
           </SafeAreaView>
         </LinearGradient>
@@ -106,7 +107,7 @@ export function AuthLayout({ title, subtitle, children }: Props) {
                     source={require("../../../../assets/brand/wordmark.png")}
                     style={[styles.authWordmark, { marginBottom: 28 }]}
                     resizeMode="contain"
-                    accessibilityLabel="Plusveda"
+                    accessibilityLabel="Ashoke Medical"
                   />
                 )}
                 <VStack gap={6} style={{ marginBottom: 24 }}>
@@ -129,7 +130,7 @@ export function AuthLayout({ title, subtitle, children }: Props) {
 
 const styles = StyleSheet.create({
   brandPanel: { flex: 1, maxWidth: 520 },
-  /** White "p" badge — reads cleanly on the teal brand gradient. */
+  /** The mark on its white tile — reads cleanly on the brand gradient. */
   brandMark: {
     width: 44,
     height: 44,
@@ -137,8 +138,8 @@ const styles = StyleSheet.create({
   },
   /** Full wordmark above the form on narrow screens (light background). */
   authWordmark: {
-    width: 170,
-    height: 37,
+    width: 214,
+    height: 60,
   },
   hIcon: {
     width: 34,

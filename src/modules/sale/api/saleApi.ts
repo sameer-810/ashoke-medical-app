@@ -76,7 +76,7 @@ export const saleApi = {
   },
 };
 
-const PROFILE_CACHE_KEY = "medstock-invoice-profile";
+const PROFILE_CACHE_KEY = "ashoke-invoice-profile";
 
 /** The last profile a successful fetch stored, or null. */
 export async function getCachedInvoiceProfile(): Promise<InvoiceProfile | null> {

@@ -216,7 +216,7 @@ export default function ReceiveStockScreen() {
   const [lastLocationId, setLastLocationId] = useState<string | null>(null);
   useEffect(() => {
     if (!orgId) return;
-    AsyncStorage.getItem(`medstock-grn-last-loc:${orgId}`)
+    AsyncStorage.getItem(`ashoke-grn-last-loc:${orgId}`)
       .then((v) => {
         if (v) setLastLocationId(v);
       })
@@ -225,7 +225,7 @@ export default function ReceiveStockScreen() {
   const rememberLocation = (id: string | null) => {
     setLastLocationId(id);
     if (id && orgId) {
-      AsyncStorage.setItem(`medstock-grn-last-loc:${orgId}`, id).catch(
+      AsyncStorage.setItem(`ashoke-grn-last-loc:${orgId}`, id).catch(
         () => {},
       );
     }

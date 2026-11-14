@@ -52,7 +52,7 @@ interface DesktopBridge {
 
 function desktop(): DesktopBridge | null {
   if (typeof window === "undefined") return null;
-  const bridge = (window as unknown as { medstock?: DesktopBridge }).medstock;
+  const bridge = (window as unknown as { ashoke?: DesktopBridge }).ashoke;
   return bridge?.printExact || bridge?.printRaw ? bridge : null;
 }
 
@@ -105,7 +105,7 @@ export function openPdfForPrint(blob: Blob, filename: string): void {
  * rarely the Windows default. Unset means "use the system default", which is
  * the right behaviour on a machine that only has the one printer.
  */
-const LABEL_PRINTER_KEY = "plusveda.labelPrinter";
+const LABEL_PRINTER_KEY = "ashoke.labelPrinter";
 
 export function getLabelPrinter(): string | undefined {
   try {
@@ -143,7 +143,7 @@ export function setLabelPrinter(name: string | null): void {
  *
  * 1 means "print as designed" and is right wherever the size is already exact.
  */
-const LABEL_SCALE_KEY = "plusveda.labelScale";
+const LABEL_SCALE_KEY = "ashoke.labelScale";
 /** Beyond this the input was a typo or the wrong bar was measured. */
 const SCALE_MIN = 0.5;
 const SCALE_MAX = 3;
@@ -179,7 +179,7 @@ export function setLabelScale(scale: number | null): void {
  * printer — it names hardware plugged into this counter. Empty = no raw
  * path; bills print through the normal (graphics) route instead.
  */
-const BILL_PRINTER_KEY = "plusveda.billPrinter";
+const BILL_PRINTER_KEY = "ashoke.billPrinter";
 
 export function getBillPrinter(): string | undefined {
   try {

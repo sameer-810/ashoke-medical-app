@@ -98,7 +98,7 @@ const secureStorage: StateStorage = {
 };
 
 let refreshPromise: Promise<string | null> | null = null;
-const STORAGE_KEY = "medstock-auth-storage";
+const STORAGE_KEY = "ashoke-auth-storage";
 
 export const useAuthStore = create<AuthState>()(
   persist(

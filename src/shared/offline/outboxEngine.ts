@@ -216,7 +216,7 @@ async function drain(queryClient: QueryClient) {
     ?.locks;
   if (locks) {
     await locks.request(
-      "medstock-outbox-drain",
+      "ashoke-outbox-drain",
       { ifAvailable: true },
       async (lock) => {
         if (lock) await drainInner(queryClient);

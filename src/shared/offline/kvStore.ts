@@ -16,7 +16,7 @@ export interface KvStore {
   removeMany(keys: string[]): Promise<void>;
 }
 
-const DB_NAME = "plusveda-mirror";
+const DB_NAME = "ashoke-mirror";
 const OBJECT_STORE = "kv";
 
 function openDb(idb: IDBFactory): Promise<IDBDatabase> {
@@ -90,7 +90,7 @@ function purgeLegacyMirror() {
     const stale: string[] = [];
     for (let i = 0; i < localStorage.length; i++) {
       const k = localStorage.key(i);
-      if (k?.startsWith("medstock-cat:")) stale.push(k);
+      if (k?.startsWith("ashoke-cat:")) stale.push(k);
     }
     stale.forEach((k) => localStorage.removeItem(k));
   } catch {

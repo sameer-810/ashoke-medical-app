@@ -1,5 +1,5 @@
 /**
- * Plusveda Design System — "quiet premium" (2026 rev).
+ * Ashoke Medical Design System — "quiet premium" (2026 rev).
  *
  * The previous system was a consumer-app language (Poppins headings, 26px KPI
  * numbers in 104px colour-coded cards, gradient banners) applied to a
@@ -24,110 +24,110 @@ export const palette = {
    * pairing in UI; every considered system tints both ends.
    */
   ink: {
-    900: "#0F1F1B",
-    800: "#152A25",
-    700: "#2C3B37",
-    600: "#44534F",
-    500: "#647572",
-    400: "#93A19E",
-    300: "#C4CDCB",
-    200: "#DFE5E3",
-    100: "#EDF1F0",
-    50: "#F5F8F7",
+    900: "#0E1B33",
+    800: "#16264A",
+    700: "#2B3A57",
+    600: "#445370",
+    500: "#62708A",
+    400: "#919DB3",
+    300: "#C3CAD8",
+    200: "#DEE3EC",
+    100: "#ECF0F5",
+    50: "#F5F7FA",
   },
 
   /**
-   * Primary brand — Plusveda green. 600 is sampled straight from the logo
-   * ("plus" wordmark + leaf, #10A058); the rest is a tonal ramp around it at the
+   * Primary brand — Ashoke Medical green. 600 is sampled straight from the logo
+   * (the "Chemist & Druggist" band, #2E9A1E); the rest is a tonal ramp around it at the
    * same hue, so the UI and the logo are the same colour family.
    *
    * NOTE: the key is still `teal` because ~100 call-sites reference
    * `palette.teal[...]`. `palette.brand` is the preferred alias going forward.
    */
   teal: {
-    900: "#073C21",
-    800: "#0A5730",
-    700: "#0C7942",
-    600: "#10A058", // ← exact logo green
-    500: "#1EB86B",
-    400: "#39D080",
-    300: "#76DBA5",
-    200: "#AEEACC",
-    100: "#D6F5E7",
-    50: "#EEFBF5",
+    900: "#123D0A",
+    800: "#1A5A10",
+    700: "#237A16",
+    600: "#2E9A1E", // ← exact logo green
+    500: "#45B332",
+    400: "#66C954",
+    300: "#97DC88",
+    200: "#C2EBB8",
+    100: "#E0F5DB",
+    50: "#F1FBEE",
   },
 
-  // Accent — cobalt blue. Links and "sales" only; no longer a second CTA fill.
+  // Accent — the logo navy (key kept as `cobalt`). Links and "sales" only.
   cobalt: {
-    900: "#0E3F6E",
-    800: "#125C9C",
-    700: "#1673C0",
-    600: "#1E8FE6",
-    500: "#3B9AEA",
-    400: "#5FAAEF",
-    300: "#93C6F4",
-    200: "#BFDDF8",
-    100: "#DCEBFC",
-    50: "#EFF6FE",
+    900: "#0B2A5C",
+    800: "#123B7C",
+    700: "#1A4E9E",
+    600: "#2362C0",
+    500: "#3F7BD3",
+    400: "#6697E0",
+    300: "#97B8EC",
+    200: "#C1D5F5",
+    100: "#DEE8FA",
+    50: "#EFF4FD",
   },
 
   // Cool neutral surfaces, tinted to match ink.
   neutral: {
     0: "#FFFFFF",
-    50: "#F5F8F7",
-    100: "#EDF1F0",
-    200: "#DFE5E3",
-    300: "#C4CDCB",
-    400: "#93A19E",
-    500: "#647572",
-    600: "#44534F",
-    700: "#2C3B37",
-    800: "#152A25",
-    900: "#0F1F1B",
+    50: "#F5F7FA",
+    100: "#ECF0F5",
+    200: "#DEE3EC",
+    300: "#C3CAD8",
+    400: "#919DB3",
+    500: "#62708A",
+    600: "#445370",
+    700: "#2B3A57",
+    800: "#16264A",
+    900: "#0E1B33",
   },
 
   surface: {
     primary: "#FFFFFF",
     /** App canvas. Cards are white planes ON this — never white-on-white. */
-    secondary: "#F6F8F8",
-    tertiary: "#F0F4F3",
+    secondary: "#F6F8FA",
+    tertiary: "#F0F3F7",
     raised: "#FFFFFF",
     /** Wells, table header rows, input backgrounds. */
-    sunken: "#F0F4F3",
-    dark: "#101E1A",
-    darkRaised: "#182924",
+    sunken: "#F0F3F7",
+    dark: "#0E1B33",
+    darkRaised: "#16264A",
   },
 
   text: {
-    primary: "#0F1F1B",
-    secondary: "#3F4F4C",
+    primary: "#0E1B33",
+    secondary: "#3B4A63",
     // 5.1:1 on white. This token carries every section label, hint and
     // timestamp in the app, so one wrong value fails on every screen at once.
-    tertiary: "#647572",
-    disabled: "#A3AFAC",
+    tertiary: "#62708A",
+    disabled: "#A4AEC0",
     inverse: "#FFFFFF",
-    accent: "#0C7942", // brand green 700 — passes AA on white
-    // 5.87:1 on white. #1E8FE6 was 3.43:1 — links are body-size text,
+    accent: "#237A16", // brand green 700 — passes AA on white
+    // 5.87:1 on white. #2362C0 was 3.43:1 — links are body-size text,
     // so they need the full 4.5:1, not the 3:1 allowed for large text.
-    link: "#1568A8",
+    link: "#1A4E9E",
   },
 
   border: {
     /** Row dividers inside a card. */
-    subtle: "#EDF1F0",
+    subtle: "#ECF0F5",
     /** The hairline. Every card, table and panel edge in the app. */
-    default: "#E2E8E6",
+    default: "#E1E6EE",
     /** Input borders and anything that must read as interactive. */
-    strong: "#CDD6D4",
-    focus: "#10A058",
-    dark: "#243530",
+    strong: "#CBD3DF",
+    focus: "#2E9A1E",
+    dark: "#22324F",
   },
 
   // Semantic — stock / expiry / billing states. Contrast-checked on white.
   success: { bg: "#E4F5EE", text: "#0F7A54", border: "#B7E6D3" }, // 4.73:1
   warning: { bg: "#FBF1DC", text: "#8A5A11", border: "#F3DCA6" }, // 5.27:1
   danger: { bg: "#FCEAE7", text: "#B32D1D", border: "#F6C9C1" }, // 5.46:1
-  info: { bg: "#E7F1FC", text: "#1467AE", border: "#BFDDF8" }, // 5.13:1
+  info: { bg: "#E7F1FC", text: "#1467AE", border: "#C1D5F5" }, // 5.13:1
 } as const;
 
 /**
@@ -180,16 +180,16 @@ export const darkPalette = {
     secondary: "#B4C0BD",
     tertiary: "#8A9793",
     disabled: "#5E6B68",
-    inverse: "#0F1F1B",
+    inverse: "#0E1B33",
     /** Lifted from 700 to 400: the deep green is unreadable on a dark ground. */
-    accent: "#39D080",
-    link: "#5FAAEF",
+    accent: "#66C954",
+    link: "#6697E0",
   },
   border: {
     subtle: "#26312E",
     default: "#2F3B38",
     strong: "#41504C",
-    focus: "#39D080",
+    focus: "#66C954",
     dark: "#0B110F",
   },
   // Deep fills, light text — same 4.5:1 discipline as the light set.
@@ -201,8 +201,8 @@ export const darkPalette = {
 
 /** Status accents, re-tuned for a dark ground. */
 export const darkAccents = {
-  teal: { color: "#39D080", tint: "#12301F" },
-  blue: { color: "#5FAAEF", tint: "#12283D" },
+  teal: { color: "#66C954", tint: "#12301F" },
+  blue: { color: "#6697E0", tint: "#12283D" },
   amber: { color: "#E5B45C", tint: "#33260E" },
   red: { color: "#F08C7C", tint: "#3A1A16" },
   purple: { color: "#A79BF0", tint: "#241F3D" },
@@ -219,12 +219,12 @@ export const darkAccents = {
  * no status gets no colour at all.
  */
 export const accents = {
-  teal: { color: "#10A058", tint: "#E9F7F0" },
-  blue: { color: "#1E8FE6", tint: "#E7F1FC" },
+  teal: { color: "#2E9A1E", tint: "#E9F7F0" },
+  blue: { color: "#2362C0", tint: "#E7F1FC" },
   amber: { color: "#C1801C", tint: "#FBF1DC" },
   red: { color: "#DB4B3D", tint: "#FCEAE7" },
   purple: { color: "#7C6FE0", tint: "#EEECFB" },
-  neutral: { color: "#647572", tint: "#F0F4F3" },
+  neutral: { color: "#62708A", tint: "#F0F3F7" },
 } as const;
 
 /**
@@ -443,7 +443,7 @@ export const typography = {
  * the separating. These exist for things that genuinely float above the page.
  */
 const soft = (y: number, blur: number, opacity: number, elev: number) => ({
-  shadowColor: "#0F1F1B",
+  shadowColor: "#0E1B33",
   shadowOffset: { width: 0, height: y },
   shadowOpacity: opacity,
   shadowRadius: blur,
@@ -488,11 +488,11 @@ export const motion = {
  * panels, where a brand moment is the actual job.
  */
 export const gradients = {
-  hero: ["#0C7942", "#0C7963", "#1873C0"] as const,
-  teal: ["#0FA05C", "#0A6B3B"] as const,
-  cobalt: ["#3B9AEA", "#1673C0"] as const,
-  light: ["#FFFFFF", "#F6F8F8"] as const,
-  mist: ["#EEFBF5", "#EFF6FE"] as const,
+  hero: ["#0B2A5C", "#14508A", "#237A16"] as const,
+  teal: ["#2E9A1E", "#1A5A10"] as const,
+  cobalt: ["#3F7BD3", "#1A4E9E"] as const,
+  light: ["#FFFFFF", "#F6F8FA"] as const,
+  mist: ["#F1FBEE", "#EFF4FD"] as const,
 } as const;
 
 /** Glass — translucent frosted panels for overlays over gradients/imagery. */

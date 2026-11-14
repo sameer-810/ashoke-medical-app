@@ -6,7 +6,7 @@
  * It is saved per org AND user: a shared till must not hand one cashier's bill
  * to the next. The stored prices are a snapshot, so restoring re-checks them.
  */
-const PREFIX = "medstock-sale-draft:";
+const PREFIX = "ashoke-sale-draft:";
 const VERSION = 1;
 /** Past a day this is not a bill in progress, it is a stray. */
 const MAX_AGE_MS = 24 * 60 * 60 * 1000;

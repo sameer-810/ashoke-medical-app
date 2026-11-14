@@ -113,10 +113,10 @@ const BUCKETS = 16;
 // that were never stored, so every device re-pulls once from the start.
 const CAT_SCHEMA_VERSION = 3;
 const keyOf = (orgId: string, table: TableName, bucket: number) =>
-  `medstock-cat:${orgId}:${table}:${bucket}`;
+  `ashoke-cat:${orgId}:${table}:${bucket}`;
 const cursorKey = (orgId: string, table: TableName) =>
-  `medstock-cat:${orgId}:cursor:${table}`;
-const schemaKey = (orgId: string) => `medstock-cat:${orgId}:schema`;
+  `ashoke-cat:${orgId}:cursor:${table}`;
+const schemaKey = (orgId: string) => `ashoke-cat:${orgId}:schema`;
 // Last hex char spreads Mongo ObjectIds evenly (it's counter-driven).
 const bucketOf = (id: string) => parseInt(id.slice(-1), 16) % BUCKETS;
 

@@ -165,7 +165,7 @@ export const useOfflineStore = create<OfflineState>()(
         })),
     }),
     {
-      name: "medstock-offline-outbox",
+      name: "ashoke-offline-outbox",
       storage: createJSONStorage(() => AsyncStorage),
       /**
        * Schema version of the persisted outbox. The queue is the ONLY copy

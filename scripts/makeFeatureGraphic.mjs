@@ -84,7 +84,7 @@ p{font-size:20px;line-height:1.35;color:rgba(214,245,231,.80)}
 <div class="ph back"><div class="s"><img src="${im("scanbill")}"></div></div>
 <div class="ph front"><div class="s"><img src="${im("dashboard")}"></div></div>
 <div class="copy">
-  <div class="eyebrow"><i></i><span>Plusveda</span></div>
+  <div class="eyebrow"><i></i><span>Ashoke Medical</span></div>
   <h1>Your pharmacy,<br>under control</h1>
   <div class="rule"></div>
   <p>Billing · Stock · Expiry · GST</p>

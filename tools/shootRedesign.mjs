@@ -34,7 +34,7 @@ const EMAIL = DEMO_EMAIL;
 const PASSWORD = DEMO_PASSWORD;
 
 /** Matches the client's localStorage key in src/shared/api/deviceId.ts. */
-const DEVICE_KEY = "medstock-device-id";
+const DEVICE_KEY = "ashoke-device-id";
 const DEVICE_ID = "5c00b07f-0000-4000-8000-000000000001"; // "screenshot rig"
 
 fs.mkdirSync(OUT, { recursive: true });

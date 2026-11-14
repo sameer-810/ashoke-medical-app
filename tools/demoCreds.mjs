@@ -9,7 +9,7 @@
  *
  * Usage:  DEMO_PASSWORD=... node tools/verifyBack.mjs
  */
-export const DEMO_EMAIL = process.env.DEMO_EMAIL || "admin@medstock.demo";
+export const DEMO_EMAIL = process.env.DEMO_EMAIL || "admin@ashoke.demo";
 
 export const DEMO_PASSWORD = (() => {
   const pw = process.env.DEMO_PASSWORD;

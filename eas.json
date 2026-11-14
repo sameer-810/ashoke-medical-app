@@ -19,8 +19,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://two3-jun26-medical-back.onrender.com/api/v1",
-        "EXPO_PUBLIC_SOCKET_URL": "https://two3-jun26-medical-back.onrender.com"
+        "EXPO_PUBLIC_API_URL": "https://SET-THE-API-ADDRESS.invalid/api/v1"
       }
     },
     "production": {
@@ -30,8 +29,7 @@
         "buildType": "app-bundle"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://two3-jun26-medical-back.onrender.com/api/v1",
-        "EXPO_PUBLIC_SOCKET_URL": "https://two3-jun26-medical-back.onrender.com"
+        "EXPO_PUBLIC_API_URL": "https://SET-THE-API-ADDRESS.invalid/api/v1"
       }
     }
   },

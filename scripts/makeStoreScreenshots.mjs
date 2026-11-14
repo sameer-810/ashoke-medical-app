@@ -164,7 +164,7 @@ const b64 = (f) =>
   "data:image/png;base64," + fs.readFileSync(f).toString("base64");
 
 /**
- * Deep Plusveda green (#073C21 -> #0C7942), straight off the app's own teal
+ * Deep Ashoke Medical green (#073C21 -> #0C7942), straight off the app's own teal
  * ramp with #10A058 as the accent — the exact logo green.
  *
  * Dark on purpose, and the opposite of the call the AshShifa listing made.
@@ -233,7 +233,7 @@ const stage = (s, T) => {
 const html = (s, T) => `<style>${css(T)}</style>
 <div class="glow"></div><div class="glow2"></div>
 <div class="wrap">
-  <div class="eyebrow"><i></i><span>Plusveda</span><i></i></div>
+  <div class="eyebrow"><i></i><span>Ashoke Medical</span><i></i></div>
   <h1>${s.title}</h1>
   <p>${s.sub}</p>
   ${stage(s, T)}

@@ -31,7 +31,7 @@ import { palette } from "@shared/designSystem";
 import { startOfflineEngine } from "@shared/offline/outboxEngine";
 
 /** Browser tab and desktop window title before a screen names itself. */
-const APP_TITLE = "Plusveda — Inventory & Sales";
+const APP_TITLE = "Ashoke Medical";
 
 /**
  * `networkMode: "always"` on both halves, because this app owns its own

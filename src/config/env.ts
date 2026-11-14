@@ -5,7 +5,7 @@ const ENV = {
   },
   production: {
     apiUrl:
-      process.env.EXPO_PUBLIC_API_URL || "https://api.medstock.app/api/v1",
+      process.env.EXPO_PUBLIC_API_URL || "/api/v1",
   },
 };
 

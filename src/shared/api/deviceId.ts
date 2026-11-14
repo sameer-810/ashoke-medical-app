@@ -7,7 +7,7 @@
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
 
-const KEY = "medstock-device-id";
+const KEY = "ashoke-device-id";
 let cached: string | null = null;
 
 function genId(): string {

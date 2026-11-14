@@ -147,9 +147,9 @@ export function invoiceHtml(sale: Sale, profile?: InvoiceProfile): string {
   <style>
     * { font-family: -apple-system, Segoe UI, Roboto, sans-serif; color: #0F172A; }
     body { padding: 28px; font-size: 12px; }
-    h1 { font-size: 20px; margin: 0; color: #10A058; }
+    h1 { font-size: 20px; margin: 0; color: #2E9A1E; }
     .muted { color: #64748B; font-size: 10px; }
-    .head { display:flex; justify-content:space-between; border-bottom:2px solid #10A058; padding-bottom:12px; margin-bottom:16px; }
+    .head { display:flex; justify-content:space-between; border-bottom:2px solid #2E9A1E; padding-bottom:12px; margin-bottom:16px; }
     .inv { text-align:right; }
     table { width:100%; border-collapse:collapse; margin-top:8px; }
     th, td { padding:7px 8px; border-bottom:1px solid #E2E8F0; text-align:left; }
@@ -168,7 +168,7 @@ export function invoiceHtml(sale: Sale, profile?: InvoiceProfile): string {
   </style></head><body>
     <div class="head">
       <div>
-        <h1>${esc(c?.legalName || "Plusveda")}</h1>
+        <h1>${esc(c?.legalName || "Ashoke Medical")}</h1>
         <div class="muted">${esc([c?.addressLine1, c?.city, c?.state, c?.pincode].filter(Boolean).join(", "))}</div>
         <div class="muted">${c?.phone ? "Ph: " + esc(c.phone) : ""} ${c?.gstin ? " · GSTIN: " + esc(c.gstin) : ""}</div>
         <div class="muted">${c?.drugLicenseNo ? "Drug Lic: " + esc(c.drugLicenseNo) : ""}</div>

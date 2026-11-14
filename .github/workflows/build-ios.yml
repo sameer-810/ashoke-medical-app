@@ -11,9 +11,9 @@ name: Build iOS (.ipa)
 # standard macOS runners are free.
 #
 # PREREQUISITE (one time, cannot be done from CI): logged in to Expo as
-# `fdami2`, run
+# the store's Expo account, run
 #   npx eas-cli build --platform ios --profile production
-# once from your Mac and answer the Apple login (5fivempvt@gmail.com) + SMS
+# once from your Mac and answer the Apple login + SMS
 # 2FA prompts. That generates
 # the distribution certificate and provisioning profile and stores them on the
 # EAS servers. This workflow then fetches them non-interactively via EXPO_TOKEN.
