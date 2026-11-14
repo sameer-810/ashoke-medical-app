@@ -1,5 +1,7 @@
 # Store assets
 
+> The images this file describes are not in the repository: the previous ones showed another product and were removed. Regenerate them from the running app with `scripts/captureStoreScreens.mjs` and `scripts/makeStoreScreenshots.mjs` once the store's own data is in it.
+
 Everything Google Play asks for in the **Main store listing** slot, generated
 from real captures of the running app.
 
