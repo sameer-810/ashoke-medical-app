@@ -61,7 +61,7 @@ const billRow = (name: string, pack: string, qty: string): DraftLine => ({
 
 test("the client's pack parser agrees with the server's on every shape", async () => {
   const { parsePackSize: server } = await import(
-    "../../23-jun26-medical-back/src/modules/ocr/ocr.units.js" as string
+    "../../ashoke-medical-back/src/modules/ocr/ocr.units.js" as string
   );
   for (const pack of [
     "1X10",
@@ -85,7 +85,7 @@ test("the client's pack parser agrees with the server's on every shape", async (
 
 test("the client's unit choice agrees with the server's resolver", async () => {
   const { resolvePackUnit } = await import(
-    "../../23-jun26-medical-back/src/modules/ocr/ocr.units.js" as string
+    "../../ashoke-medical-back/src/modules/ocr/ocr.units.js" as string
   );
   for (const product of [tablet, drops, noPacks]) {
     for (const pack of ["1X10", "10ML", "1X15", "1 S", "100 GM"]) {
@@ -155,7 +155,7 @@ test("a counted pack on a product with no pack units still gets a note", () => {
 
 test("the client and server agree on which packs are measures", async () => {
   const { isMeasurePack: server } = await import(
-    "../../23-jun26-medical-back/src/modules/ocr/ocr.units.js" as string
+    "../../ashoke-medical-back/src/modules/ocr/ocr.units.js" as string
   );
   for (const pack of [
     "20 GM",

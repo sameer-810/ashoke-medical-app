@@ -58,7 +58,7 @@ const pick = <T>(a: T[]) => a[Math.floor(rnd() * a.length)];
 
 test("offline pricing matches the server's priceLine + totals for 300 random carts", async () => {
   const { saleService } = await import(
-    "../../23-jun26-medical-back/src/modules/sale/sale.service.js" as string
+    "../../ashoke-medical-back/src/modules/sale/sale.service.js" as string
   );
   const round = (n: number) => Math.round((n + Number.EPSILON) * 100) / 100;
 
@@ -147,7 +147,7 @@ test("offline pricing matches the server's priceLine + totals for 300 random car
 
 test("with tax off, device and server both charge no GST, in either pricing mode", async () => {
   const { saleService } = await import(
-    "../../23-jun26-medical-back/src/modules/sale/sale.service.js" as string
+    "../../ashoke-medical-back/src/modules/sale/sale.service.js" as string
   );
   for (let i = 0; i < 200; i++) {
     const priceIncludesTax = rnd() < 0.5;
@@ -191,7 +191,7 @@ test("with tax off, device and server both charge no GST, in either pricing mode
 
 test("the till's MRP ceiling is the server's, value for value", async () => {
   const server = await import(
-    "../../23-jun26-medical-back/src/modules/sale/mrpCeiling.js" as string
+    "../../ashoke-medical-back/src/modules/sale/mrpCeiling.js" as string
   );
   for (let i = 0; i < 2000; i++) {
     const mrpPerBase = Math.round(rnd() * 5000000) / 10000 + 0.01;
