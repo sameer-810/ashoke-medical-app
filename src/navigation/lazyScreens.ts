@@ -69,22 +69,11 @@ export const ProfileScreen = lazyScreen(
 export const RemindersScreen = lazyScreen(
   () => import("@modules/reminder/screens/RemindersScreen"),
 );
-export const PricingScreen = lazyScreen(
-  () => import("@modules/pricing/screens/PricingScreen"),
-);
 
 // Shelf labels reprint offline; the encoder is no longer in the main bundle.
 preloadAlso(() => import("bwip-js/browser"));
 
 // Reached only from a link or with no session, so never worth preloading.
-export const AdminNavigator = lazyScreen(
-  () => import("@navigation/AdminNavigator"),
-  { preload: false },
-);
-export const SignupScreen = lazyScreen(
-  () => import("@modules/auth/screens/SignupScreen"),
-  { preload: false },
-);
 export const ForgotPasswordScreen = lazyScreen(
   () => import("@modules/auth/screens/ForgotPasswordScreen"),
   { preload: false },

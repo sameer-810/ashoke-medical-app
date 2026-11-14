@@ -557,7 +557,7 @@ export default function DashboardScreen() {
               ? "—"
               : `${data?.team.active ?? 0} active · ${data?.team.total ?? 0} total`
           }
-          subtitle="Team members in your workspace"
+          subtitle="Team members in your store"
           chevron={false}
         />
       </ListGroup>

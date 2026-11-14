@@ -16,8 +16,6 @@ export interface Organization {
   id: string;
   name: string;
   industry: string;
-  /** Set while on the free trial started at signup; null on a paid plan. */
-  trialEndsAt?: string | null;
 }
 
 export interface User {

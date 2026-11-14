@@ -3,7 +3,6 @@ import { authApi } from "@modules/auth/api/authApi";
 import {
   AuthResponse,
   LoginPayload,
-  SignupPayload,
   ForgotPasswordPayload,
   ResetPasswordPayload,
 } from "@modules/auth/types";
@@ -21,13 +20,6 @@ const applyAuth = (res: AuthResponse) => {
 export const useLogin = () =>
   useMutation({
     mutationFn: (payload: LoginPayload) => authApi.login(payload),
-    onSuccess: applyAuth,
-  });
-
-/** Registering starts the free trial and signs the owner in at once. */
-export const useSignup = () =>
-  useMutation({
-    mutationFn: (payload: SignupPayload) => authApi.signup(payload),
     onSuccess: applyAuth,
   });
 

@@ -22,30 +22,6 @@ export interface LoginPayload {
   signOutOthers?: boolean;
 }
 
-export interface SignupPayload {
-  organizationName: string;
-  industry?: string;
-  firstName: string;
-  lastName?: string;
-  email: string;
-  /** Required now — sales rings this about the quotation. */
-  phone: string;
-  /** The owner's own address, distinct from the shop's shared login email. */
-  personalEmail: string;
-  password: string;
-  /**
-   * The plan card they clicked, arriving as `?plan=12m` on the signup URL.
-   *
-   * Not a purchase — nothing is charged at signup and the workspace still
-   * starts on the free trial. It rides along so the quotation call opens with the
-   * right number instead of "which one were you looking at?".
-   */
-  planCode?: string;
-}
-
-/** Signup starts the free trial and signs the owner straight in. */
-export type SignupResponse = AuthResponse;
-
 export interface ForgotPasswordPayload {
   email: string;
 }
@@ -69,7 +45,7 @@ export interface DeviceSession {
 }
 
 export interface SessionList {
-  /** Devices allowed at once — set per pharmacy by the platform admin. */
+  /** Devices allowed at once — set on the server (MAX_DEVICES_PER_USER). */
   limit: number;
   used: number;
   sessions: DeviceSession[];

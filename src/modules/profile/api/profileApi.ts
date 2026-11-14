@@ -29,7 +29,7 @@ export const profileApi = {
   deleteAccount: async (password: string) => {
     const res = await apiClient.delete<{
       success: boolean;
-      data: { message: string; workspaceClosed: boolean };
+      data: { message: string };
     }>("/users/me", { data: { password } });
     return res.data.data;
   },

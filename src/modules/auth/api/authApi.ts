@@ -4,8 +4,6 @@ import {
   AuthResponse,
   MessageResponse,
   LoginPayload,
-  SignupPayload,
-  SignupResponse,
   ForgotPasswordPayload,
   SessionList,
   ResetPasswordPayload,
@@ -19,14 +17,6 @@ export const authApi = {
       deviceId,
       deviceName: getDeviceName(),
     });
-    return res.data;
-  },
-  /**
-   * Registers a workspace. Does NOT sign you in — the account is queued for
-   * admin approval and login is refused until then.
-   */
-  signup: async (payload: SignupPayload): Promise<SignupResponse> => {
-    const res = await apiClient.post<SignupResponse>("/auth/signup", payload);
     return res.data;
   },
   forgotPassword: async (

@@ -33,9 +33,7 @@ import { CommandPalette } from "./CommandPalette";
 import { PhoneTabBar, useHasPhoneTabs } from "./PhoneTabBar";
 import { OfflineBanner } from "@shared/offline/OfflineBanner";
 import { UpdateBanner } from "@shared/UpdateBanner";
-import { TrialBanner } from "@modules/auth/components/TrialBanner";
 import { SetupGate } from "./SetupGate";
-import { SHOW_PRICES } from "@shared/storePolicy";
 import { NAV_ITEMS, useVisibleNavItems } from "./navItems";
 import { preloadScreens } from "./lazyScreen";
 import {
@@ -46,7 +44,6 @@ import {
   InventoryNavigator,
   MedGuideNavigator,
   PdcScreen,
-  PricingScreen,
   ProductsNavigator,
   ProfileScreen,
   PurchaseOrdersNavigator,
@@ -146,7 +143,6 @@ export default function AppNavigator() {
     <View style={{ flex: 1 }}>
       <UpdateBanner />
       <OfflineBanner />
-      <TrialBanner />
       <SetupGate>
         <Drawer.Navigator
           // Dashboard is only registered for those who may see it; naming it
@@ -230,14 +226,6 @@ export default function AppNavigator() {
               />
             );
           })}
-          {/* Reached from the trial strip, not the sidebar — so not a nav item. */}
-          {SHOW_PRICES ? (
-            <Drawer.Screen
-              name="Plans"
-              component={PricingScreen}
-              options={{ title: "Plans" }}
-            />
-          ) : null}
         </Drawer.Navigator>
         {!isWide ? (
           <PhoneTabBar

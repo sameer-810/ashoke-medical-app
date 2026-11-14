@@ -81,20 +81,10 @@ export const teamApi = {
     return res.data;
   },
 
-  /** Seat and device limits this pharmacy has set, plus the plan ceiling. */
+  /** The store's member and device limits. */
   limits: async () => {
     const res = await apiClient.get<{ success: boolean; data: TeamLimits }>(
       "/organization/limits",
-    );
-    return res.data.data;
-  },
-  updateLimits: async (payload: {
-    maxUsers?: number;
-    maxDevicesPerUser?: number;
-  }) => {
-    const res = await apiClient.patch<{ success: boolean; data: TeamLimits }>(
-      "/organization/limits",
-      payload,
     );
     return res.data.data;
   },

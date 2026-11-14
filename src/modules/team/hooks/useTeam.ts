@@ -95,15 +95,6 @@ export const useAuditLogs = (params?: {
     placeholderData: keepPreviousData,
   });
 
-/** Seat and device limits for this pharmacy, with the plan's ceiling. */
+/** The store's member and device limits. */
 export const useTeamLimits = () =>
   useQuery({ queryKey: ["team-limits"], queryFn: teamApi.limits });
-
-export const useUpdateTeamLimits = () => {
-  const qc = useQueryClient();
-  return useMutation({
-    mutationFn: (p: { maxUsers?: number; maxDevicesPerUser?: number }) =>
-      teamApi.updateLimits(p),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["team-limits"] }),
-  });
-};

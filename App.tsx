@@ -103,43 +103,8 @@ const linking = {
       Auth: {
         screens: {
           Login: "login",
-          /*
-            Two paths, one screen. `signup` is what the app has always used and
-            what every existing link points at; `create-workspace` is the URL
-            the public price list sends people to, named after the heading on
-            the form. Both carry `?plan=12m` through to the signup payload.
-
-            An alias is cheap; a renamed route would 404 every link already in
-            circulation, and these arrive forwarded on WhatsApp long after they
-            are sent.
-          */
-          Signup: {
-            path: "signup",
-            parse: { plan: (v: string) => v },
-            alias: ["create-workspace"],
-          },
           ForgotPassword: "forgot-password",
           ResetPassword: "reset-password",
-          Pricing: "pricing",
-        },
-      },
-      // Platform console (superadmin) — its own URL space under /admin.
-      Admin: {
-        path: "admin",
-        screens: {
-          AdminLogin: "login",
-          AdminDashboard: "",
-          AdminPharmacyDetail: "pharmacies/:id",
-          AdminCreatePharmacy: "pharmacies/new",
-          AdminEditPharmacy: "pharmacies/:id/edit",
-          AdminPharmacyUsers: "pharmacies/:id/users",
-          AdminCatalog: "catalogue",
-          AdminCatalogForm: "catalogue/edit",
-          AdminPlans: "plans",
-          AdminPlanForm: "plans/edit",
-          AdminAdmins: "admins",
-          AdminAdminForm: "admins/edit",
-          AdminAudit: "audit",
         },
       },
       App: {

@@ -9,9 +9,8 @@ import { loginSchema } from "@modules/auth/auth.validation";
 import { apiErrorMessage, apiErrorCode } from "@api/apiClient";
 import { ControlledTextField } from "@shared/form/ControlledTextField";
 import { palette, radius } from "@shared/designSystem";
-import { Text, VStack, HStack, Button } from "@shared/ui";
+import { Text, VStack, Button } from "@shared/ui";
 import { AuthLayout } from "@modules/auth/components/AuthLayout";
-import { SHOW_PRICES } from "@shared/storePolicy";
 import { useAuthStore } from "@shared/store/useAuthStore";
 import { isDraftKey } from "@modules/sale/saleDraft";
 
@@ -20,17 +19,8 @@ type Nav = { navigate: (s: string, params?: object) => void };
 export default function LoginScreen({ navigation }: { navigation: Nav }) {
   const [show, setShow] = useState(false);
   const mut = useLogin();
-  // Pending and rejected are both workspace states, not credential errors, but
-  // they need different copy: pending resolves by waiting, rejected does not.
   const errCode = apiErrorCode(mut.error);
-  const isPending = errCode === "WORKSPACE_PENDING_APPROVAL";
-  const isRejected = errCode === "WORKSPACE_REJECTED";
-  // Also when the trial ran out mid-session and the refresh was refused.
   const signOutCode = useAuthStore((s) => s.signOutCode);
-  const trialEnded =
-    errCode === "TRIAL_EXPIRED" ||
-    (!mut.isError && signOutCode === "TRIAL_EXPIRED");
-  const needsUs = isPending || isRejected;
   // The session died mid-work. Say so, and whether the bill survived.
   const [draftKept, setDraftKept] = useState(false);
   useEffect(() => {
@@ -38,7 +28,7 @@ export default function LoginScreen({ navigation }: { navigation: Nav }) {
       .then((keys) => setDraftKept(keys.some(isDraftKey)))
       .catch(() => {});
   }, []);
-  const sessionEnded = !mut.isError && Boolean(signOutCode) && !trialEnded;
+  const sessionEnded = !mut.isError && Boolean(signOutCode);
   /**
    * The device cap is the one refusal the user can clear themselves, but only
    * from here — the profile it used to point at is behind this very login.
@@ -96,47 +86,6 @@ export default function LoginScreen({ navigation }: { navigation: Nav }) {
                 loading={mut.isPending}
                 onPress={submitSigningOutOthers}
               />
-            </VStack>
-          </View>
-        ) : trialEnded ? (
-          <View style={pendingBox}>
-            <VStack gap={8}>
-              <Text variant="label" tone="primary">
-                Your free trial has ended
-              </Text>
-              <Text variant="body-sm" tone="secondary">
-                Your data is safe. Choose a plan and contact us — once we
-                activate it you can sign in again and carry on where you left
-                off.
-              </Text>
-              {SHOW_PRICES ? (
-                <Button
-                  label="See plans"
-                  variant="secondary"
-                  size="sm"
-                  onPress={() =>
-                    navigation.navigate("Pricing", { trialEnded: true })
-                  }
-                />
-              ) : null}
-            </VStack>
-          </View>
-        ) : mut.isError && needsUs ? (
-          <View style={pendingBox}>
-            <VStack gap={4}>
-              <Text variant="label" tone="primary">
-                {isRejected
-                  ? "This registration was declined"
-                  : "Your registration is under review"}
-              </Text>
-              <Text variant="body-sm" tone="secondary">
-                {apiErrorMessage(
-                  mut.error,
-                  isRejected
-                    ? "Get in touch and we'll go through what happened."
-                    : "You'll receive an email once your workspace is approved.",
-                )}
-              </Text>
             </VStack>
           </View>
         ) : mut.isError ? (
@@ -203,21 +152,6 @@ export default function LoginScreen({ navigation }: { navigation: Nav }) {
           size="lg"
         />
 
-        <HStack
-          justify="center"
-          align="center"
-          gap={5}
-          style={{ marginTop: 8 }}
-        >
-          <Text variant="body-sm" tone="tertiary">
-            New to Plusveda?
-          </Text>
-          <Pressable onPress={() => navigation.navigate("Signup")} hitSlop={6}>
-            <Text variant="label" tone="link">
-              Create a workspace
-            </Text>
-          </Pressable>
-        </HStack>
       </VStack>
     </AuthLayout>
   );

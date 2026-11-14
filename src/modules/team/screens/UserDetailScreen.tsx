@@ -263,7 +263,7 @@ export default function UserDetailScreen() {
               strokeWidth={1.8}
             />
             <Text variant="label-lg" tone="primary" align="center">
-              This is the workspace Admin
+              This is the store Admin
             </Text>
             <Text variant="body-sm" tone="tertiary" align="center">
               The Admin always holds every permission and cannot be disabled or

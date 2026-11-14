@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Switch, Image, Platform } from "react-native";
-import { SHOW_PRICES } from "@shared/storePolicy";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -38,7 +37,6 @@ import {
   Button,
   Banner,
   StatusChip,
-  ConfirmDialog,
   TextField,
 } from "@shared/ui";
 
@@ -686,25 +684,6 @@ export default function SettingsScreen() {
             </Text>
             <SwitchRow control={control} name="alertInApp" />
           </HStack>
-          {/* Paid add-ons: not offered on iOS — see storePolicy.ts. */}
-          {SHOW_PRICES && (
-            <>
-              <PaidAlertRow
-                control={control}
-                name="alertEmail"
-                label="Email alerts"
-                price={data?.alertPricing?.emailMonthly ?? 0}
-                currency={data?.alertPricing?.currency || "INR"}
-              />
-              <PaidAlertRow
-                control={control}
-                name="alertSms"
-                label="SMS alerts"
-                price={data?.alertPricing?.smsMonthly ?? 0}
-                currency={data?.alertPricing?.currency || "INR"}
-              />
-            </>
-          )}
         </VStack>
       </Card>
 
@@ -858,90 +837,3 @@ const okBox = {
   marginBottom: 16,
 } as const;
 
-/**
- * A metered alert channel: states the price before it switches on.
- *
- * Turning email or SMS alerts on costs the pharmacy money, so it must not
- * behave like the free in-app toggle. The price shown is the one the platform
- * set for THIS pharmacy — quoted per customer, which is why it comes from the
- * organisation rather than a global rate.
- *
- * Where no price has been quoted yet, we ask them to request the service
- * instead of inventing a number: showing "₹0" would read as free.
- */
-function PaidAlertRow({
-  control,
-  name,
-  label,
-  price,
-  currency,
-}: {
-  control: any;
-  name: string;
-  label: string;
-  price: number;
-  currency: string;
-}) {
-  const [asking, setAsking] = React.useState<null | (() => void)>(null);
-  const money = (n: number) =>
-    `${currency === "INR" ? "₹" : currency + " "}${n.toLocaleString("en-IN")}`;
-
-  return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ field }) => (
-        <>
-          <HStack align="center" justify="space-between">
-            <VStack gap={2} flex={1}>
-              <HStack gap={8} align="center" wrap>
-                <Text variant="label-lg" tone="primary">
-                  {label}
-                </Text>
-                <StatusChip
-                  label={
-                    price > 0 ? `${money(price)}/month` : "Price on request"
-                  }
-                  tone={price > 0 ? "warning" : "neutral"}
-                />
-              </HStack>
-              <Text variant="caption" tone="tertiary">
-                {field.value
-                  ? "Chargeable service — billed by the platform team."
-                  : "Paid add-on. You'll be shown the price before it's enabled."}
-              </Text>
-            </VStack>
-            <Switch
-              value={field.value}
-              onValueChange={(next) => {
-                // Only switching ON needs consent; switching off is free.
-                if (!next) return field.onChange(false);
-                setAsking(() => () => field.onChange(true));
-              }}
-              trackColor={{ true: palette.teal[500], false: palette.ink[200] }}
-              thumbColor="#FFFFFF"
-            />
-          </HStack>
-
-          <ConfirmDialog
-            visible={Boolean(asking)}
-            title={`Turn on ${label.toLowerCase()}?`}
-            message={
-              price > 0
-                ? `${label} are charged at ${money(price)} per month, set by the platform team for this pharmacy. Turning this on requests the service — you will be billed from activation.`
-                : `${label} are a paid add-on and no price has been set for this pharmacy yet. Turning this on sends a request to the platform team, who will confirm the price before the service starts.`
-            }
-            confirmLabel={
-              price > 0 ? "Turn on and accept charge" : "Request service"
-            }
-            onConfirm={() => {
-              asking?.();
-              setAsking(null);
-            }}
-            onCancel={() => setAsking(null)}
-          />
-        </>
-      )}
-    />
-  );
-}

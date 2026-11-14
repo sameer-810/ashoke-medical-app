@@ -33,7 +33,7 @@ export type NavSection =
   | "Purchasing"
   | "Sales"
   | "Insights"
-  | "Workspace";
+  | "Store";
 
 /** Sidebar section order (Vyapar-style grouping; mirrors Sales vs Purchasing). */
 export const SECTION_ORDER: NavSection[] = [
@@ -43,7 +43,7 @@ export const SECTION_ORDER: NavSection[] = [
   "Purchasing",
   "Sales",
   "Insights",
-  "Workspace",
+  "Store",
 ];
 
 export interface NavItem {
@@ -208,28 +208,28 @@ export const NAV_ITEMS: NavItem[] = [
     section: "Insights",
     permission: PERMISSIONS.AUDIT_VIEW,
   },
-  // ---- Workspace ----
+  // ---- Store ----
   {
     name: "Team",
     label: "Team & Access",
     icon: Users,
-    section: "Workspace",
+    section: "Store",
     adminOnly: true,
   },
   {
     name: "Settings",
     label: "Settings",
     icon: Settings,
-    section: "Workspace",
+    section: "Store",
     adminOnly: true,
   },
   {
     name: "Reminders",
     label: "Reminders",
     icon: BellRing,
-    section: "Workspace",
+    section: "Store",
   },
-  { name: "Profile", label: "Profile", icon: UserRound, section: "Workspace" },
+  { name: "Profile", label: "Profile", icon: UserRound, section: "Store" },
 ];
 
 /**
