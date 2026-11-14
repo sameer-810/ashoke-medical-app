@@ -77,7 +77,6 @@ const SLOW_QUERIES: [QueryKey, number][] = [
   [["warehouse-tree"], 5 * 60_000],
   [["permission-catalogue"], 5 * 60_000],
   [["team-limits"], 5 * 60_000],
-  [["settings"], 60_000],
   [["reminder-summary"], 60_000],
   [["dashboard-summary"], 30_000],
   [["dashboard", "finance"], 30_000],
@@ -117,7 +116,6 @@ const linking = {
           Search: "search",
           Reports: "reports",
           AuditLog: "audit-logs",
-          Settings: "settings",
           Reminders: "reminders",
           Profile: "profile",
 

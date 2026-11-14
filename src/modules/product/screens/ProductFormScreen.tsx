@@ -290,7 +290,7 @@ export default function ProductFormScreen() {
                 name="taxRatePct"
                 label="GST %"
                 keyboardType="decimal-pad"
-                placeholder="from settings"
+                placeholder="store default"
               />
             </View>
             <View style={col}>
@@ -307,7 +307,7 @@ export default function ProductFormScreen() {
                 name="reorderLevel"
                 label="Reorder level"
                 keyboardType="number-pad"
-                placeholder="from settings"
+                placeholder="store default"
               />
             </View>
           </HStack>

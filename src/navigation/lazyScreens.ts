@@ -18,9 +18,6 @@ export const InventoryNavigator = lazyScreen(
 export const CustomersNavigator = lazyScreen(
   () => import("@modules/customer/CustomersNavigator"),
 );
-export const SettingsScreen = lazyScreen(
-  () => import("@modules/settings/screens/SettingsScreen"),
-);
 export const ReceivingNavigator = lazyScreen(
   () => import("@modules/inventory/ReceivingNavigator"),
 );

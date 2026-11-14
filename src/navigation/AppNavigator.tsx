@@ -33,7 +33,6 @@ import { CommandPalette } from "./CommandPalette";
 import { PhoneTabBar, useHasPhoneTabs } from "./PhoneTabBar";
 import { OfflineBanner } from "@shared/offline/OfflineBanner";
 import { UpdateBanner } from "@shared/UpdateBanner";
-import { SetupGate } from "./SetupGate";
 import { NAV_ITEMS, useVisibleNavItems } from "./navItems";
 import { preloadScreens } from "./lazyScreen";
 import {
@@ -51,7 +50,6 @@ import {
   RemindersScreen,
   ReportsScreen,
   SearchScreen,
-  SettingsScreen,
   ShortBookScreen,
   SuppliersNavigator,
   TeamNavigator,
@@ -95,7 +93,6 @@ const SCREENS: Record<string, React.ComponentType> = {
   Reports: ReportsScreen,
   Team: TeamNavigator,
   AuditLog: AuditLogScreen,
-  Settings: SettingsScreen,
   Reminders: RemindersScreen,
   Profile: ProfileScreen,
 };
@@ -143,99 +140,97 @@ export default function AppNavigator() {
     <View style={{ flex: 1 }}>
       <UpdateBanner />
       <OfflineBanner />
-      <SetupGate>
-        <Drawer.Navigator
-          // Dashboard is only registered for those who may see it; naming it
-          // for anyone else is a blank app, not a redirect.
-          initialRouteName={items[0]?.name}
-          drawerContent={drawerContent}
-          /**
-           * Track which section is showing so the phone tab bar can highlight it.
-           *
-           * The bar has to render as a sibling of the navigator (it sits over the
-           * content, not inside the drawer panel), which puts it outside the
-           * drawer's navigation context — so it can't read the state itself. The
-           * `state` event fires on every navigation, including deep links and
-           * browser back, so this stays correct without polling.
-           */
-          screenListeners={{
-            state: (e) => {
-              const s = e.data?.state;
-              if (!s) return;
-              const name = s.routeNames[s.index];
-              if (name) setActiveSection(String(name));
-            },
-          }}
-          screenOptions={{
-            // The permanent drawer IS the sidebar on desktop; phones get an app bar.
-            drawerType: isWide ? "permanent" : "front",
-            headerShown: !isWide,
-            header: ({ route, navigation }) => (
-              <SafeAreaView edges={["top"]} style={styles.appBarSafe}>
-                <HStack align="center" gap={12} style={styles.appBar}>
-                  {/* Only when the bottom bar isn't carrying a "More" tab —
+      <Drawer.Navigator
+        // Dashboard is only registered for those who may see it; naming it
+        // for anyone else is a blank app, not a redirect.
+        initialRouteName={items[0]?.name}
+        drawerContent={drawerContent}
+        /**
+         * Track which section is showing so the phone tab bar can highlight it.
+         *
+         * The bar has to render as a sibling of the navigator (it sits over the
+         * content, not inside the drawer panel), which puts it outside the
+         * drawer's navigation context — so it can't read the state itself. The
+         * `state` event fires on every navigation, including deep links and
+         * browser back, so this stays correct without polling.
+         */
+        screenListeners={{
+          state: (e) => {
+            const s = e.data?.state;
+            if (!s) return;
+            const name = s.routeNames[s.index];
+            if (name) setActiveSection(String(name));
+          },
+        }}
+        screenOptions={{
+          // The permanent drawer IS the sidebar on desktop; phones get an app bar.
+          drawerType: isWide ? "permanent" : "front",
+          headerShown: !isWide,
+          header: ({ route, navigation }) => (
+            <SafeAreaView edges={["top"]} style={styles.appBarSafe}>
+              <HStack align="center" gap={12} style={styles.appBar}>
+                {/* Only when the bottom bar isn't carrying a "More" tab —
                     two controls opening the same drawer is clutter. */}
-                  {hasTabs ? null : (
-                    <Pressable
-                      onPress={() => navigation.openDrawer()}
-                      hitSlop={8}
-                      style={styles.menuBtn}
-                      accessibilityLabel="Open menu"
-                    >
-                      <Menu
-                        size={22}
-                        color={palette.text.primary}
-                        strokeWidth={2}
-                      />
-                    </Pressable>
-                  )}
-                  <Image
-                    source={require("../../assets/brand/mark.png")}
-                    style={styles.appBarLogo}
-                    resizeMode="contain"
-                    accessibilityLabel="Plusveda"
-                  />
-                  <Text variant="h4" tone="primary">
-                    {NAV_ITEMS.find((i) => i.name === route.name)?.label ||
-                      "Plusveda"}
-                  </Text>
-                </HStack>
-              </SafeAreaView>
-            ),
-            drawerStyle: {
-              width:
-                isWide && collapsed
-                  ? layout.sidebarCollapsedWidth
-                  : layout.sidebarWidth,
-              // The Sidebar draws its own right border.
-              borderRightWidth: 0,
-            },
-            overlayColor: "rgba(15,23,42,0.4)",
-            sceneStyle: { backgroundColor: palette.surface.secondary },
-          }}
-        >
-          {items.map((item) => {
-            const Component = SCREENS[item.name];
-            if (!Component) return null;
-            return (
-              <Drawer.Screen
-                key={item.name}
-                name={item.name}
-                component={Component}
-                options={{ title: item.label }}
-              />
-            );
-          })}
-        </Drawer.Navigator>
-        {!isWide ? (
-          <PhoneTabBar
-            activeRoute={activeSection}
-            onNavigate={(name) => drawerNav.current?.navigate(name)}
-            onOpenMore={() => drawerNav.current?.openDrawer()}
-          />
-        ) : null}
-        <CommandPalette />
-      </SetupGate>
+                {hasTabs ? null : (
+                  <Pressable
+                    onPress={() => navigation.openDrawer()}
+                    hitSlop={8}
+                    style={styles.menuBtn}
+                    accessibilityLabel="Open menu"
+                  >
+                    <Menu
+                      size={22}
+                      color={palette.text.primary}
+                      strokeWidth={2}
+                    />
+                  </Pressable>
+                )}
+                <Image
+                  source={require("../../assets/brand/mark.png")}
+                  style={styles.appBarLogo}
+                  resizeMode="contain"
+                  accessibilityLabel="Plusveda"
+                />
+                <Text variant="h4" tone="primary">
+                  {NAV_ITEMS.find((i) => i.name === route.name)?.label ||
+                    "Plusveda"}
+                </Text>
+              </HStack>
+            </SafeAreaView>
+          ),
+          drawerStyle: {
+            width:
+              isWide && collapsed
+                ? layout.sidebarCollapsedWidth
+                : layout.sidebarWidth,
+            // The Sidebar draws its own right border.
+            borderRightWidth: 0,
+          },
+          overlayColor: "rgba(15,23,42,0.4)",
+          sceneStyle: { backgroundColor: palette.surface.secondary },
+        }}
+      >
+        {items.map((item) => {
+          const Component = SCREENS[item.name];
+          if (!Component) return null;
+          return (
+            <Drawer.Screen
+              key={item.name}
+              name={item.name}
+              component={Component}
+              options={{ title: item.label }}
+            />
+          );
+        })}
+      </Drawer.Navigator>
+      {!isWide ? (
+        <PhoneTabBar
+          activeRoute={activeSection}
+          onNavigate={(name) => drawerNav.current?.navigate(name)}
+          onOpenMore={() => drawerNav.current?.openDrawer()}
+        />
+      ) : null}
+      <CommandPalette />
     </View>
   );
 }

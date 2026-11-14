@@ -39,6 +39,7 @@ import {
   ConfirmDialog,
 } from "@shared/ui";
 import { fmtDateTime } from "@shared/format";
+import { StoreTools } from "@modules/profile/components/StoreTools";
 
 export default function ProfileScreen() {
   const user = useAuthStore((s) => s.user);
@@ -316,6 +317,8 @@ export default function ProfileScreen() {
           )}
         </VStack>
       </Card>
+
+      <StoreTools isAdmin={isAdmin} />
 
       <Button
         label="Sign out"

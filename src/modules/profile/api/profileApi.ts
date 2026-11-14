@@ -33,4 +33,15 @@ export const profileApi = {
     }>("/users/me", { data: { password } });
     return res.data.data;
   },
+  /**
+   * Builds a backup of the store's data server-side and emails it. Slow by
+   * nature (the server zips the whole dataset), hence the long timeout.
+   */
+  emailBackup: async () => {
+    const res = await apiClient.post<{
+      success: boolean;
+      data: { emailedTo: string; fileName: string; sizeBytes: number };
+    }>("/backup/email", undefined, { timeout: 180_000 });
+    return res.data.data;
+  },
 };
