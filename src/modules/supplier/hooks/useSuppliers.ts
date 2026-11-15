@@ -12,6 +12,7 @@ export const useSuppliers = (params?: {
   search?: string;
   page?: number;
   limit?: number;
+  status?: "active" | "inactive";
 }) =>
   useQuery({
     queryKey: ["suppliers", params],

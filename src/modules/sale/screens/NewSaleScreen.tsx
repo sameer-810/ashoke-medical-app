@@ -1074,7 +1074,7 @@ export default function NewSaleScreen() {
     )
     .map((p) => p.name);
 
-  const submit = (rxOverride?: string | null) => {
+  const submit = (rxOverride?: string | null, doctorOverride?: string) => {
     // A ref, not state: two presses inside one render see the same `canSubmit`.
     if (!canSubmit || submitLock.current) return;
     setQueuedNotice(null);
@@ -1104,7 +1104,9 @@ export default function NewSaleScreen() {
       {
         clientOpId: opId,
         customerId,
-        doctorName: doctorName.trim() || undefined,
+        // The gate's doctor arrives as an argument: state set in the same tick
+        // is not visible to this call yet.
+        doctorName: (doctorOverride || doctorName).trim() || undefined,
         prescriptionId: rxId || undefined,
         taxType,
         paymentMode: paymentMode as never,
@@ -2073,7 +2075,7 @@ export default function NewSaleScreen() {
           setRxGateOpen(false);
           // Only the gate was mid-sale. A voluntary attach returns to the cart,
           // which may not even have items in it yet.
-          if (rxPurpose === "gate") submit(id);
+          if (rxPurpose === "gate") submit(id, doc || undefined);
         }}
         onCancel={() => setRxGateOpen(false)}
       />

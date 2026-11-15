@@ -392,7 +392,11 @@ export default function SupplierDetailScreen() {
         }
         loading={payMut.isPending}
         validate={(v) =>
-          Number(v) > 0 ? null : "Enter an amount greater than 0"
+          Number(v) > 0
+            ? Number(v) > outstanding
+              ? `That is more than the outstanding ${money(Math.max(0, outstanding))}`
+              : null
+            : "Enter an amount greater than 0"
         }
         onSubmit={(v) => payMut.mutate(Number(v))}
         onCancel={() => setPayOpen(false)}

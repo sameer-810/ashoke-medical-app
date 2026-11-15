@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import { View, ActivityIndicator } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useAuthStore } from "@shared/store/useAuthStore";
+import { profileApi } from "@modules/profile/api/profileApi";
 import { palette } from "@shared/designSystem";
 import AuthNavigator from "@navigation/AuthNavigator";
 import AppNavigator from "@navigation/AppNavigator";
@@ -16,7 +17,16 @@ export default function RootNavigator() {
   const { isAuthenticated, isHydrated, isAuthChecked } = useAuthStore();
 
   useEffect(() => {
-    if (isHydrated) useAuthStore.getState().initializeAuth();
+    if (isHydrated)
+      useAuthStore
+        .getState()
+        .initializeAuth()
+        .then(() => {
+          // Pick up permission changes an Admin made since the last sign-in.
+          const s = useAuthStore.getState();
+          if (s.isAuthenticated)
+            profileApi.me().then(s.updateUser, () => undefined);
+        });
   }, [isHydrated]);
 
   if (!isHydrated || !isAuthChecked) {

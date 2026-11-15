@@ -43,7 +43,7 @@ export default function SupplierFormScreen() {
       reset({
         name: supplier.name,
         contactPerson: supplier.contactPerson,
-        mobile: supplier.mobile,
+        mobile: (supplier.mobile || "").replace(/^\+?91(?=\d{10}$)/, ""),
         email: supplier.email,
         address: supplier.address,
         gstin: supplier.gstin,

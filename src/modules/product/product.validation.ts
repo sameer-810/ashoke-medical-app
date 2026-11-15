@@ -3,6 +3,7 @@ import {
   requiredText,
   freeText,
   optionalNonNegative,
+  optionalWholeNumber,
   optionalPercent,
 } from "@shared/form/fields";
 
@@ -22,7 +23,7 @@ export const productSchema = z.object({
   mrp: optionalNonNegative,
   taxRatePct: optionalPercent,
   hsnCode: freeText,
-  reorderLevel: optionalNonNegative,
+  reorderLevel: optionalWholeNumber,
   categoryId: z.string().nullable(),
   brandId: z.string().nullable(),
   scheduleDrug: z.string(),

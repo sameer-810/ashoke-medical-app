@@ -32,7 +32,7 @@ export default function CatalogFormScreen() {
   const id = route.params?.id as string | undefined;
   const editing = Boolean(id);
 
-  const { data: product } = useCatalogProduct(id);
+  const { data: product, isError: notFound } = useCatalogProduct(id);
   const createMut = useCreateCatalog();
   const updateMut = useUpdateCatalog(id || "");
   const deleteMut = useDeleteCatalog();
@@ -107,6 +107,17 @@ export default function CatalogFormScreen() {
   };
 
   const busy = createMut.isPending || updateMut.isPending;
+
+  if (editing && notFound)
+    return (
+      <Screen back="Back to catalogue" overline="Catalogue" title="Edit medicine">
+        <View style={styles.errorBox}>
+          <Text variant="body-sm" tone="danger">
+            This medicine is not in the catalogue. It may have been removed.
+          </Text>
+        </View>
+      </Screen>
+    );
 
   return (
     <Screen

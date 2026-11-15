@@ -17,7 +17,7 @@ export const addUserSchema = z.object({
     .min(1, "Email is required")
     .email("Enter a valid email"),
   phone: optionalPhone,
-  password: z.string().min(6, "At least 6 characters"),
+  password: z.string().min(10, "At least 10 characters"),
 });
 
 export type AddUserFormValues = z.infer<typeof addUserSchema>;

@@ -16,7 +16,7 @@ const email = z
   .email("Enter a valid email");
 
 // Length only on the client — the server holds the real password policy.
-const newPassword = z.string().min(6, "At least 6 characters");
+const newPassword = z.string().min(10, "At least 10 characters");
 
 export const loginSchema = z.object({
   email,

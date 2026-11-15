@@ -18,7 +18,7 @@
 import React, { useState } from "react";
 import { View, Pressable, Platform, StyleSheet } from "react-native";
 import { Calendar } from "lucide-react-native";
-import { palette, radius, outline, layout } from "../designSystem";
+import { palette, radius, outline, layout, fonts } from "../designSystem";
 import { Text } from "./Text";
 
 // Native-only module: requiring it on web would pull in native bindings that
@@ -156,7 +156,9 @@ export function DateField({
             border: "none",
             outline: "none",
             background: "transparent",
-            font: "inherit",
+            // Not "inherit": the parent is a View, which carries no font, so the
+            // control fell back to the browser serif.
+            fontFamily: fonts.bodyRegular,
             fontSize: compact ? 13 : 15,
             color: palette.text.primary,
             padding: 0,

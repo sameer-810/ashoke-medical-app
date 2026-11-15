@@ -115,7 +115,7 @@ export default function CustomerDetailScreen() {
           title="This customer isn't available"
           message="They may have been deactivated. Open Customers and switch to the Deactivated tab to find and reactivate them."
           actionLabel="Go to customers"
-          onAction={() => navigation.navigate("Customers")}
+          onAction={() => navigation.navigate("CustomersList")}
         />
       </Screen>
     );
@@ -422,7 +422,11 @@ export default function CustomerDetailScreen() {
         }
         loading={payMut.isPending}
         validate={(v) =>
-          Number(v) > 0 ? null : "Enter an amount greater than 0"
+          Number(v) > 0
+            ? Number(v) > outstanding
+              ? `That is more than the outstanding ${money(outstanding)}`
+              : null
+            : "Enter an amount greater than 0"
         }
         onSubmit={(v) => payMut.mutate(Number(v))}
         onCancel={() => setCollectOpen(false)}
@@ -436,7 +440,10 @@ export default function CustomerDetailScreen() {
         loading={removeMut.isPending}
         onConfirm={() =>
           removeMut.mutate(id, {
-            onSuccess: () => navigation.navigate("Customers"),
+            onSuccess: () => {
+              setRemoveOpen(false);
+              navigation.navigate("CustomersList");
+            },
             // The server refuses while a balance is outstanding. Closing the
             // dialog on failure left the refusal invisible and the screen
             // looking like nothing had happened.

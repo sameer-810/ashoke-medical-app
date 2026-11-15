@@ -38,7 +38,7 @@ export default function CustomerFormScreen() {
     if (customer)
       reset({
         name: customer.name,
-        mobile: customer.mobile,
+        mobile: (customer.mobile || "").replace(/^\+?91(?=\d{10}$)/, ""),
         email: customer.email,
         address: customer.address,
         gstin: customer.gstin,

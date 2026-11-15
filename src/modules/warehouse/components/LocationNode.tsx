@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Pressable, StyleSheet } from "react-native";
 import {
   ChevronRight,
@@ -45,6 +45,12 @@ export function LocationNode({
 }: Props) {
   const [open, setOpen] = useState(depth < 2);
   const hasChildren = node.children.length > 0;
+  // Open when a child is added, or the new row hides behind a closed caret.
+  const childCount = useRef(node.children.length);
+  useEffect(() => {
+    if (node.children.length > childCount.current) setOpen(true);
+    childCount.current = node.children.length;
+  }, [node.children.length]);
   const canAdd = node.allowedChildTypes.length > 0;
   const Icon = TYPE_ICON[node.type];
 
@@ -89,11 +95,10 @@ export function LocationNode({
         </View>
 
         <View style={{ flex: 1 }}>
-          <HStack gap={8} align="center">
+          <HStack gap={8} align="center" wrap>
             <Text
               variant="label-lg"
               tone={node.isActive ? "primary" : "tertiary"}
-              numberOfLines={1}
             >
               {node.name}
             </Text>

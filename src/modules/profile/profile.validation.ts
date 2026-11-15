@@ -9,7 +9,7 @@ export const profileDetailsSchema = z.object({
 
 export const changePasswordSchema = z.object({
   currentPassword: z.string().min(1, "Enter your current password"),
-  newPassword: z.string().min(6, "At least 6 characters"),
+  newPassword: z.string().min(10, "At least 10 characters"),
 });
 
 export type ProfileDetailsValues = z.infer<typeof profileDetailsSchema>;

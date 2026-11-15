@@ -62,7 +62,12 @@ export default function DamagedScreen() {
   const tooMuch =
     effectiveDir === "out" && Boolean(cell.locationId) && qty > cell.available;
   const ready =
-    cell.productId && cell.batchId && cell.locationId && qty > 0 && !tooMuch;
+    cell.productId &&
+    cell.batchId &&
+    cell.locationId &&
+    qty > 0 &&
+    Number.isInteger(qty) &&
+    !tooMuch;
 
   const submit = () => {
     if (!ready) return;
@@ -155,7 +160,13 @@ export default function DamagedScreen() {
                 onChangeText={setQuantity}
                 keyboardType="decimal-pad"
                 placeholder="0"
-                error={tooMuch ? `Only ${cell.available} available` : undefined}
+                error={
+                  tooMuch
+                    ? `Only ${cell.available} available`
+                    : Number.isInteger(qty)
+                      ? undefined
+                      : "Enter a whole number"
+                }
               />
             </View>
           </HStack>

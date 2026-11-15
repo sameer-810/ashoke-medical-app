@@ -145,7 +145,7 @@ export default function AddUserScreen() {
             leading={
               <Lock size={18} color={palette.text.tertiary} strokeWidth={1.8} />
             }
-            placeholder="At least 6 characters"
+            placeholder="At least 10 characters"
             secureTextEntry
           />
           <View>

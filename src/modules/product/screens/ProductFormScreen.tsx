@@ -160,10 +160,10 @@ export default function ProductFormScreen() {
       title={editing ? "Edit product" : "Add product"}
       subtitle={editing ? product?.sku : "Define a catalogue item"}
     >
-      {mut.isError && (
+      {(mut.isError || removeMut.isError) && (
         <Banner
           tone="danger"
-          message={apiErrorMessage(mut.error)}
+          message={apiErrorMessage(mut.error || removeMut.error)}
           style={{ marginBottom: 12 }}
         />
       )}
@@ -403,6 +403,8 @@ export default function ProductFormScreen() {
         onConfirm={() =>
           removeMut.mutate(id!, {
             onSuccess: () => goBackOr(navigation, "ProductsList"),
+            // The server refuses while stock remains; show why, above the form.
+            onError: () => setConfirmOpen(false),
           })
         }
         onCancel={() => setConfirmOpen(false)}

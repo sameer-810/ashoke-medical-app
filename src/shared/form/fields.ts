@@ -74,6 +74,11 @@ export const optionalNonNegative = optional(
   "Enter a valid amount",
 );
 
+export const optionalWholeNumber = optional(
+  (v) => Number.isInteger(Number(v)) && Number(v) >= 0,
+  "Enter a whole number",
+);
+
 export const optionalPercent = optional(
   (v) => Number.isFinite(Number(v)) && Number(v) >= 0 && Number(v) <= 100,
   "Enter a number from 0 to 100",

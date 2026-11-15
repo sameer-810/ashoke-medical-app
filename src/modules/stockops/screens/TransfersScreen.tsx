@@ -65,6 +65,7 @@ export default function TransfersScreen() {
     cell.locationId &&
     toLocationId &&
     qty > 0 &&
+    Number.isInteger(qty) &&
     !tooMuch;
 
   const submit = () => {
@@ -138,7 +139,13 @@ export default function TransfersScreen() {
                 onChangeText={setQuantity}
                 keyboardType="decimal-pad"
                 placeholder="0"
-                error={tooMuch ? `Only ${cell.available} available` : undefined}
+                error={
+                  tooMuch
+                    ? `Only ${cell.available} available`
+                    : Number.isInteger(qty)
+                      ? undefined
+                      : "Enter a whole number"
+                }
               />
             </View>
           </HStack>

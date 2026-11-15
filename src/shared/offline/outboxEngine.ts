@@ -16,6 +16,7 @@ import { environment } from "@config/env";
 import { apiClient, apiErrorMessage } from "@api/apiClient";
 import { getDeviceId, getDeviceName } from "@api/deviceId";
 import { useAuthStore } from "../store/useAuthStore";
+import { PERMISSIONS } from "../permissions";
 import { useOfflineStore } from "./useOfflineStore";
 import {
   localCatalog,
@@ -69,9 +70,11 @@ async function probe() {
  * and cheap — safe to call on every reconnect.
  */
 export async function ensureSeriesRegistered() {
-  const { user, isAuthenticated } = useAuthStore.getState();
+  const { user, isAuthenticated, hasPermission } = useAuthStore.getState();
   const { online } = useOfflineStore.getState();
   if (!isAuthenticated || !user || !online || registering) return;
+  // Only someone who can bill needs a bill series; the server refuses the rest.
+  if (!hasPermission(PERMISSIONS.SALES_MANAGE)) return;
   registering = true;
   try {
     const deviceId = await getDeviceId();

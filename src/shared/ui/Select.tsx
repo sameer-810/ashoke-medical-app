@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { ChevronDown, Check, Plus, X, Search } from "lucide-react-native";
 import { palette, radius, outline, shadows, layout } from "../designSystem";
+import { apiErrorMessage } from "../api/apiClient";
 import { Text } from "./Text";
 import { TextField } from "./TextField";
 import { useControlHeight } from "./useBreakpoint";
@@ -178,14 +179,18 @@ export function Select({
     return () => document.removeEventListener("keydown", onKey, true);
   }, [open]);
 
+  const [createError, setCreateError] = useState<string | null>(null);
   const create = async () => {
     if (!onCreate || !newLabel.trim()) return;
     setCreating(true);
+    setCreateError(null);
     try {
       const made = await onCreate(newLabel.trim());
       if (made) onChange(made.value);
       setNewLabel("");
       close();
+    } catch (e) {
+      setCreateError(apiErrorMessage(e));
     } finally {
       setCreating(false);
     }
@@ -361,6 +366,15 @@ export function Select({
                 </Pressable>
               </View>
             )}
+            {createError ? (
+              <Text
+                variant="body-sm"
+                tone="danger"
+                style={{ paddingHorizontal: 12, paddingBottom: 10 }}
+              >
+                {createError}
+              </Text>
+            ) : null}
           </Pressable>
         </Pressable>
       </Modal>

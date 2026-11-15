@@ -83,7 +83,7 @@ export default function ResetPasswordScreen({
           leading={
             <Lock size={18} color={palette.text.tertiary} strokeWidth={1.8} />
           }
-          placeholder="At least 6 characters"
+          placeholder="At least 10 characters"
           secureTextEntry={!show}
           trailing={
             <Pressable hitSlop={10} onPress={() => setShow((s) => !s)}>

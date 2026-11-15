@@ -76,10 +76,12 @@ export function ReturnModal({
     if (!(q > 0) || !(l.baseQuantity > 0)) return 0;
     return (q / l.baseQuantity) * (l.taxableAmount + l.taxAmount);
   };
-  const refundTotal = sale.lines.reduce((s, l) => s + refundOf(l), 0);
   const completesInvoice = sale.lines.every(
     (l) => (Number(qty[l.id]) || 0) + l.returnedBaseQty >= l.baseQuantity,
   );
+  const refundTotal = completesInvoice
+    ? sale.grandTotal - (sale.totalReturned || 0)
+    : sale.lines.reduce((s, l) => s + refundOf(l), 0);
 
   const submit = () => {
     const lines = sale.lines

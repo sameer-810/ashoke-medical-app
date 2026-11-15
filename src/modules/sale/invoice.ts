@@ -61,7 +61,8 @@ function billOfSupplyHtml(sale: Sale, profile?: InvoiceProfile): string {
     </tr>`;
     })
     .join("");
-  const less = Math.max(0, mrpVal - sale.grandTotal);
+  // Round-off prints on its own line, so Less stops at the unrounded total.
+  const less = Math.max(0, mrpVal - (sale.grandTotal - (sale.roundOff || 0)));
   const lic = [c?.drugLicenseNo, c?.drugLicenseNo2].filter(Boolean).join(",");
   const addr = [c?.addressLine1, c?.addressLine2, c?.city]
     .filter(Boolean)

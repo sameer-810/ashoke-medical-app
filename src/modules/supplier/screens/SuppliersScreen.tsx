@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Plus, Truck } from "lucide-react-native";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSuppliers } from "@modules/supplier/hooks/useSuppliers";
+import { supplierApi } from "@modules/supplier/api/supplierApi";
 import { Supplier } from "@modules/supplier/types";
 import { useAuthStore } from "@shared/store/useAuthStore";
 import { PERMISSIONS } from "@shared/permissions";
@@ -15,6 +17,7 @@ import {
   Button,
   ListRow,
   SearchInput,
+  ChipsRow,
   Pagination,
   DataTable,
   Column,
@@ -35,7 +38,9 @@ export default function SuppliersScreen() {
   const [limit, setLimit] = useState(50);
 
   // Filter change → back to page 1 (adjusted during render, not in an effect).
-  const filterKey = `${search}|${limit}`;
+  // Deactivated suppliers are hidden everywhere else; this is the way back.
+  const [status, setStatus] = useState<"active" | "inactive">("active");
+  const filterKey = `${search}|${limit}|${status}`;
   const [prevFilterKey, setPrevFilterKey] = useState(filterKey);
   if (filterKey !== prevFilterKey) {
     setPrevFilterKey(filterKey);
@@ -47,6 +52,7 @@ export default function SuppliersScreen() {
       ...(search.trim() ? { search: search.trim() } : {}),
       page,
       limit,
+      status,
     });
   const suppliers = data?.data ?? [];
   const total = data?.meta?.total ?? 0;
@@ -54,8 +60,16 @@ export default function SuppliersScreen() {
 
   if (!isLoading && totalPages > 0 && page > totalPages) setPage(totalPages);
 
+  const qc = useQueryClient();
+  const restoreMut = useMutation({
+    mutationFn: (id: string) => supplierApi.restore(id),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["suppliers"] }),
+  });
+  // A deactivated supplier has no detail page, so its row reactivates it.
   const open = (s: Supplier) =>
-    navigation.navigate("SupplierDetail", { id: s.id });
+    status === "inactive"
+      ? canWrite && restoreMut.mutate(s.id)
+      : navigation.navigate("SupplierDetail", { id: s.id });
 
   const columns: Column<Supplier>[] = [
     {
@@ -140,6 +154,22 @@ export default function SuppliersScreen() {
         onChangeText={setSearch}
         placeholder="Search supplier"
       />
+
+      <View style={{ marginTop: 10 }}>
+        <ChipsRow
+          chips={[
+            { key: "active", label: "Active" },
+            { key: "inactive", label: "Deactivated" },
+          ]}
+          active={status}
+          onChange={(k: string) => setStatus(k as "active" | "inactive")}
+        />
+      </View>
+      {status === "inactive" && canWrite && suppliers.length > 0 ? (
+        <Text variant="body-sm" tone="secondary" style={{ marginTop: 10 }}>
+          Select a supplier to reactivate it.
+        </Text>
+      ) : null}
 
       {isError ? (
         <ErrorState

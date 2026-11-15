@@ -36,7 +36,12 @@ export interface SupplierOutstanding {
 }
 
 export const supplierApi = {
-  list: async (params?: { search?: string; page?: number; limit?: number }) => {
+  list: async (params?: {
+    search?: string;
+    page?: number;
+    limit?: number;
+    status?: "active" | "inactive";
+  }) => {
     const res = await apiClient.get<Paginated<Supplier>>("/suppliers", {
       params,
     });
