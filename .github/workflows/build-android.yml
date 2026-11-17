@@ -1,4 +1,4 @@
-name: Build Android (.aab)
+name: Build Android APK
 
 # Run it manually from the GitHub "Actions" tab → "Build Android (.aab)" →
 # "Run workflow". Builds with `eas build --local` on GitHub's free Ubuntu runner
@@ -17,7 +17,7 @@ on:
         options:
           - production
           - preview
-        default: production
+        default: preview
 
 jobs:
   build:
@@ -78,7 +78,11 @@ jobs:
         run: npm install
 
       - name: Setup Android SDK (puts sdkmanager on PATH + accepts licenses)
+        # `tools` was removed from the Android SDK repository. setup-android's
+        # default still requests it, so explicitly request the supported package.
         uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - name: Install required Android SDK packages
         run: sdkmanager "platforms;android-36" "build-tools;34.0.0" "ndk;27.3.13750724" "cmake;3.22.1"
