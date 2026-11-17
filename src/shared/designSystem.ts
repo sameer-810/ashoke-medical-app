@@ -57,18 +57,18 @@ export const palette = {
     50: "#F1FBEE",
   },
 
-  // Accent — the logo navy (key kept as `cobalt`). Links and "sales" only.
+  // Accent — Ashoke orange. The legacy `cobalt` key keeps existing call-sites stable.
   cobalt: {
-    900: "#0B2A5C",
-    800: "#123B7C",
-    700: "#1A4E9E",
-    600: "#2362C0",
-    500: "#3F7BD3",
-    400: "#6697E0",
-    300: "#97B8EC",
-    200: "#C1D5F5",
-    100: "#DEE8FA",
-    50: "#EFF4FD",
+    900: "#7A3600",
+    800: "#974600",
+    700: "#AD5700",
+    600: "#FF9933", // exact logo orange
+    500: "#FFB866",
+    400: "#FFC985",
+    300: "#FFD9A3",
+    200: "#FFE5C2",
+    100: "#FFF0DE",
+    50: "#FFF8F0",
   },
 
   // Cool neutral surfaces, tinted to match ink.
@@ -107,9 +107,8 @@ export const palette = {
     disabled: "#A4AEC0",
     inverse: "#FFFFFF",
     accent: "#237A16", // brand green 700 — passes AA on white
-    // 5.87:1 on white. #2362C0 was 3.43:1 — links are body-size text,
-    // so they need the full 4.5:1, not the 3:1 allowed for large text.
-    link: "#1A4E9E",
+    // 5.03:1 on white — links are body-size text and need the full AA floor.
+    link: "#AD5700",
   },
 
   border: {
@@ -127,7 +126,7 @@ export const palette = {
   success: { bg: "#E4F5EE", text: "#0F7A54", border: "#B7E6D3" }, // 4.73:1
   warning: { bg: "#FBF1DC", text: "#8A5A11", border: "#F3DCA6" }, // 5.27:1
   danger: { bg: "#FCEAE7", text: "#B32D1D", border: "#F6C9C1" }, // 5.46:1
-  info: { bg: "#E7F1FC", text: "#1467AE", border: "#C1D5F5" }, // 5.13:1
+  info: { bg: "#FFF0DE", text: "#AD5700", border: "#FFE5C2" }, // 5.03:1
 } as const;
 
 /**
@@ -183,7 +182,7 @@ export const darkPalette = {
     inverse: "#0E1B33",
     /** Lifted from 700 to 400: the deep green is unreadable on a dark ground. */
     accent: "#66C954",
-    link: "#6697E0",
+    link: "#FFB866",
   },
   border: {
     subtle: "#26312E",
@@ -196,13 +195,13 @@ export const darkPalette = {
   success: { bg: "#12301F", text: "#5FD498", border: "#1F5133" },
   warning: { bg: "#33260E", text: "#E5B45C", border: "#57401A" },
   danger: { bg: "#3A1A16", text: "#F08C7C", border: "#5E2A24" },
-  info: { bg: "#12283D", text: "#6FB4F0", border: "#1D4468" },
+  info: { bg: "#3D240F", text: "#FFB866", border: "#6B3B14" },
 } as const;
 
 /** Status accents, re-tuned for a dark ground. */
 export const darkAccents = {
   teal: { color: "#66C954", tint: "#12301F" },
-  blue: { color: "#6697E0", tint: "#12283D" },
+  blue: { color: "#FFB866", tint: "#3D240F" },
   amber: { color: "#E5B45C", tint: "#33260E" },
   red: { color: "#F08C7C", tint: "#3A1A16" },
   purple: { color: "#A79BF0", tint: "#241F3D" },
@@ -220,7 +219,7 @@ export const darkAccents = {
  */
 export const accents = {
   teal: { color: "#2E9A1E", tint: "#E9F7F0" },
-  blue: { color: "#2362C0", tint: "#E7F1FC" },
+  blue: { color: "#FF9933", tint: "#FFF0DE" },
   amber: { color: "#C1801C", tint: "#FBF1DC" },
   red: { color: "#DB4B3D", tint: "#FCEAE7" },
   purple: { color: "#7C6FE0", tint: "#EEECFB" },
@@ -482,17 +481,17 @@ export const motion = {
 /**
  * Gradients.
  *
- * The green→blue sweep is retired from product surfaces: a gradient banner at
+ * The green→orange sweep is retired from product surfaces: a gradient banner at
  * the top of a working dashboard is decoration where the user wants density,
  * and it was the loudest thing on the screen. These are kept for auth/marketing
  * panels, where a brand moment is the actual job.
  */
 export const gradients = {
-  hero: ["#0B2A5C", "#14508A", "#237A16"] as const,
+  hero: ["#FF9933", "#D97600", "#237A16"] as const,
   teal: ["#2E9A1E", "#1A5A10"] as const,
-  cobalt: ["#3F7BD3", "#1A4E9E"] as const,
+  cobalt: ["#FFB866", "#AD5700"] as const,
   light: ["#FFFFFF", "#F6F8FA"] as const,
-  mist: ["#F1FBEE", "#EFF4FD"] as const,
+  mist: ["#F1FBEE", "#FFF8F0"] as const,
 } as const;
 
 /** Glass — translucent frosted panels for overlays over gradients/imagery. */
