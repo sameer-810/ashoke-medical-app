@@ -20,7 +20,14 @@
       }
     },
     "android": {
-      "permissions": ["android.permission.INTERNET"],
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.CAMERA",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+        "android.permission.RECORD_AUDIO"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -81,6 +88,12 @@
       ],
       "./plugins/withReleaseSigning",
       "./plugins/withAndroidBuildTuning"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "0477ea11-913a-4fc4-a2cc-e14b477b0456"
+      }
+    },
+    "owner": "medicalashoks-team"
   }
 }
