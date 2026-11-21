@@ -26,12 +26,13 @@ import {
 } from "@expo-google-fonts/inter";
 
 import RootNavigator from "@navigation/RootNavigator";
+import { showLanding } from "@navigation/AuthNavigator";
 import { navigationRef } from "@navigation/navigationRef";
 import { palette } from "@shared/designSystem";
 import { startOfflineEngine } from "@shared/offline/outboxEngine";
 
 /** Browser tab and desktop window title before a screen names itself. */
-const APP_TITLE = "Ashoke Medical";
+const APP_TITLE = "Ashok Medical";
 
 /**
  * `networkMode: "always"` on both halves, because this app owns its own
@@ -101,6 +102,7 @@ const linking = {
     screens: {
       Auth: {
         screens: {
+          ...(showLanding ? { Landing: "" } : {}),
           Login: "login",
           ForgotPassword: "forgot-password",
           ResetPassword: "reset-password",
