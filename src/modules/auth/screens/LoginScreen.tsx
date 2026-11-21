@@ -57,7 +57,7 @@ export default function LoginScreen({ navigation }: { navigation: Nav }) {
   return (
     <AuthLayout
       title="Welcome back"
-      subtitle="Sign in to Ashoke Medical"
+      subtitle="Sign in to Ashok Medical"
     >
       <VStack gap={16}>
         {sessionEnded ? (

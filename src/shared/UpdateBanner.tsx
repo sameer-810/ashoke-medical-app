@@ -32,7 +32,7 @@ export function UpdateBanner() {
       style={styles.strip}
     >
       <Text style={styles.text}>
-        A new version of Ashoke Medical is ready. Finish this bill, then tap here to
+        A new version of Ashok Medical is ready. Finish this bill, then tap here to
         refresh.
       </Text>
     </Pressable>

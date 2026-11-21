@@ -1,5 +1,5 @@
 /**
- * Ashoke Medical Design System — "quiet premium" (2026 rev).
+ * Ashok Medical Design System — "quiet premium" (2026 rev).
  *
  * The previous system was a consumer-app language (Poppins headings, 26px KPI
  * numbers in 104px colour-coded cards, gradient banners) applied to a
@@ -37,7 +37,7 @@ export const palette = {
   },
 
   /**
-   * Primary brand — Ashoke Medical green. 600 is sampled straight from the logo
+   * Primary brand — Ashok Medical green. 600 is sampled straight from the logo
    * (the "Chemist & Druggist" band, #2E9A1E); the rest is a tonal ramp around it at the
    * same hue, so the UI and the logo are the same colour family.
    *
@@ -57,7 +57,7 @@ export const palette = {
     50: "#F1FBEE",
   },
 
-  // Accent — Ashoke orange. The legacy `cobalt` key keeps existing call-sites stable.
+  // Accent — Ashok orange. The legacy `cobalt` key keeps existing call-sites stable.
   cobalt: {
     900: "#7A3600",
     800: "#974600",

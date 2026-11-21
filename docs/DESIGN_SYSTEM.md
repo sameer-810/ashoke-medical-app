@@ -1,4 +1,4 @@
-# Ashoke Medical design system — "quiet premium"
+# Ashok Medical design system — "quiet premium"
 
 _Rev. 2026-08-14. Supersedes the ServRx-aligned system. Source of truth is
 `src/shared/designSystem.ts`; this file explains the reasoning so the next

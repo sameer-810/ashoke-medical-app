@@ -92,7 +92,7 @@ export default function ReceiptsScreen() {
       setNote(
         ok
           ? `Downloaded ${total} receipt${total === 1 ? "" : "s"} as ${ext.toUpperCase()}.`
-          : "Downloads work in the browser and desktop app — open Ashoke Medical there to save the file.",
+          : "Downloads work in the browser and desktop app — open Ashok Medical there to save the file.",
       );
     } catch (e) {
       setNote(apiErrorMessage(e));

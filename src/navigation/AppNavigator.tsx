@@ -189,11 +189,11 @@ export default function AppNavigator() {
                   source={require("../../assets/brand/mark.png")}
                   style={styles.appBarLogo}
                   resizeMode="contain"
-                  accessibilityLabel="Ashoke Medical"
+                  accessibilityLabel="Ashok Medical"
                 />
                 <Text variant="h4" tone="primary">
                   {NAV_ITEMS.find((i) => i.name === route.name)?.label ||
-                    "Ashoke Medical"}
+                    "Ashok Medical"}
                 </Text>
               </HStack>
             </SafeAreaView>

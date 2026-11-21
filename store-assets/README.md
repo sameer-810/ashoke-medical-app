@@ -90,7 +90,7 @@ call-to-action copy, no price or ranking claims, nothing important within
 
 ## Design notes
 
-- Background is **deep Ashoke Medical green** (`#073C21` → `#0C7942`) with `#39D080`
+- Background is **deep Ashok Medical green** (`#073C21` → `#0C7942`) with `#39D080`
   as the accent — straight off the app's own teal ramp, `#10A058` being the
   exact logo green.
 - Dark on purpose. The app's UI is almost entirely white; on a pale background

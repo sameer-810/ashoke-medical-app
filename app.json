@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Ashoke Medical",
+    "name": "Ashok Medical",
     "slug": "ashoke-medical",
     "version": "1.0.0",
     "runtimeVersion": {
@@ -14,8 +14,8 @@
       "bundleIdentifier": "com.ashokemedical.app",
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "Ashoke Medical uses the camera to scan barcodes and read the batch number on medicine packs, and to photograph supplier bills and cheques, for example to add a strip of paracetamol to a sale in one scan.",
-        "NSPhotoLibraryUsageDescription": "Ashoke Medical uses your photo library to import a picture of a supplier bill or cheque you have already taken, so its details can be filled in for you.",
+        "NSCameraUsageDescription": "Ashok Medical uses the camera to scan barcodes and read the batch number on medicine packs, and to photograph supplier bills and cheques, for example to add a strip of paracetamol to a sale in one scan.",
+        "NSPhotoLibraryUsageDescription": "Ashok Medical uses your photo library to import a picture of a supplier bill or cheque you have already taken, so its details can be filled in for you.",
         "ITSAppUsesNonExemptEncryption": false
       }
     },
@@ -67,7 +67,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Ashoke Medical uses the camera to scan barcodes and read the batch number on medicine packs, and to photograph supplier bills and cheques, for example to add a strip of paracetamol to a sale in one scan.",
+          "cameraPermission": "Ashok Medical uses the camera to scan barcodes and read the batch number on medicine packs, and to photograph supplier bills and cheques, for example to add a strip of paracetamol to a sale in one scan.",
           "microphonePermission": false,
           "recordAudioAndroidPermission": false
         }
@@ -75,8 +75,8 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Ashoke Medical uses your photo library to import a picture of a supplier bill or cheque you have already taken, so its details can be filled in for you.",
-          "cameraPermission": "Ashoke Medical uses the camera to scan barcodes and read the batch number on medicine packs, and to photograph supplier bills and cheques, for example to add a strip of paracetamol to a sale in one scan.",
+          "photosPermission": "Ashok Medical uses your photo library to import a picture of a supplier bill or cheque you have already taken, so its details can be filled in for you.",
+          "cameraPermission": "Ashok Medical uses the camera to scan barcodes and read the batch number on medicine packs, and to photograph supplier bills and cheques, for example to add a strip of paracetamol to a sale in one scan.",
           "microphonePermission": false
         }
       ],

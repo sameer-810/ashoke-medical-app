@@ -110,7 +110,7 @@ export function Sidebar({
             source={require("../../assets/brand/mark.png")}
             style={styles.mark}
             resizeMode="contain"
-            accessibilityLabel="Ashoke Medical"
+            accessibilityLabel="Ashok Medical"
           />
         ) : (
           <>
@@ -119,7 +119,7 @@ export function Sidebar({
                 source={require("../../assets/brand/wordmark.png")}
                 style={styles.wordmark}
                 resizeMode="contain"
-                accessibilityLabel="Ashoke Medical"
+                accessibilityLabel="Ashok Medical"
               />
               <Text variant="caption" tone="tertiary" numberOfLines={1}>
                 {organization?.name || "Inventory"}

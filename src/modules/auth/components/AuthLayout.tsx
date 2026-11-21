@@ -54,10 +54,10 @@ export function AuthLayout({ title, subtitle, children }: Props) {
                 source={require("../../../../assets/brand/mark.png")}
                 style={styles.brandMark}
                 resizeMode="contain"
-                accessibilityLabel="Ashoke Medical"
+                accessibilityLabel="Ashok Medical"
               />
               <Text variant="h2" tone="inverse">
-                Ashoke Medical
+                Ashok Medical
               </Text>
             </HStack>
 
@@ -107,7 +107,7 @@ export function AuthLayout({ title, subtitle, children }: Props) {
                     source={require("../../../../assets/brand/wordmark.png")}
                     style={[styles.authWordmark, { marginBottom: 28 }]}
                     resizeMode="contain"
-                    accessibilityLabel="Ashoke Medical"
+                    accessibilityLabel="Ashok Medical"
                   />
                 )}
                 <VStack gap={6} style={{ marginBottom: 24 }}>
