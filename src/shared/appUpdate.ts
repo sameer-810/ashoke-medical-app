@@ -28,8 +28,16 @@ export function runningHash(): string | null {
 /** The hash the host serves now. `vcheck` keeps the service worker out of it. */
 export async function servedHash(): Promise<string | null> {
   try {
-    const res = await fetch(`/?vcheck=${Date.now()}`, { cache: "no-store" });
-    return res.ok ? entryHash(await res.text()) : null;
+    // On the hosted site "/" is the public website and the app is /app.html;
+    // elsewhere (desktop, dev) the app is "/".
+    for (const path of ["/app.html", "/"]) {
+      const res = await fetch(`${path}?vcheck=${Date.now()}`, {
+        cache: "no-store",
+      });
+      const hash = res.ok ? entryHash(await res.text()) : null;
+      if (hash) return hash;
+    }
+    return null;
   } catch {
     return null;
   }

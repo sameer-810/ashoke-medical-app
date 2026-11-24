@@ -1,11 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "expo export -p web --clear",
+  "buildCommand": "expo export -p web --clear && mv dist/index.html dist/app.html && cd website && npm ci && npm run build && cp -r dist/. ../dist/",
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "framework": null,
   "rewrites": [
-    { "source": "/((?!_expo/|assets/).*)", "destination": "/index.html" }
+    { "source": "/info/:slug", "destination": "/index.html" },
+    { "source": "/((?!_expo/|assets/).*)", "destination": "/app.html" }
   ],
   "headers": [
     {

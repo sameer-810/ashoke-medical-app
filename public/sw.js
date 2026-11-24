@@ -96,8 +96,14 @@ async function recordShell(shell, res) {
 async function keepAssets(urls) {
   const shell = await caches.open(CACHE);
   if (!(await shell.match(SHELL_KEY))) {
-    const res = await fetch("/");
-    if (res.ok) await recordShell(shell, res);
+    // On the hosted site "/" is the public website; the app is /app.html.
+    for (const path of ["/app.html", "/"]) {
+      const res = await fetch(path);
+      if (res.ok && ENTRY.test(await res.clone().text())) {
+        await recordShell(shell, res);
+        break;
+      }
+    }
   }
   const { current } = await readBuilds(shell);
   const cache = await caches.open(staticCacheName(current));

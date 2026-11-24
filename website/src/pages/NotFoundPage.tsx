@@ -1,0 +1,11 @@
+import { Link } from 'react-router-dom';
+import { EmptyState } from '../components/common/States';
+
+export function NotFoundPage() {
+  return (
+    <div className="container-page py-12">
+      <EmptyState title="Page not found" text="The page you’re looking for doesn’t exist or has moved."
+        action={<Link to="/" className="btn-primary btn-md">Go to Home</Link>} />
+    </div>
+  );
+}
