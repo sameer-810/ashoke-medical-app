@@ -161,6 +161,8 @@ export interface ReceivePayload {
   /** Save even though this supplier's bill number already has a GRN. */
   allowDuplicate?: boolean;
   notes?: string;
+  /** "scan": added from Inventory by barcode scan / pack read, not a bill. */
+  source?: "purchase" | "scan";
   receivedAt?: string;
   /** Intra-state splits GST into CGST+SGST; inter-state charges IGST. */
   taxType?: "intra" | "inter";
@@ -217,6 +219,8 @@ export interface ReceiptDetail extends ReceiptListItem {
     sku: string;
     batchId: string | null;
     batchNumber: string;
+    /** The lot already existed: this line added to it instead of creating one. */
+    existingBatch?: boolean;
     locationId: string | null;
     labelCode: string | null;
     mfgDate: string | null;

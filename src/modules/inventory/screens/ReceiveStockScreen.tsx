@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import {
   View,
   Pressable,
@@ -32,10 +31,7 @@ import {
   AlertTriangle,
   Check,
 } from "lucide-react-native";
-import {
-  useProducts,
-  useCreateProduct,
-} from "@modules/product/hooks/useProducts";
+import { useCreateProduct } from "@modules/product/hooks/useProducts";
 import { useAllLocations } from "@modules/warehouse/hooks/useWarehouse";
 import {
   useSuppliers,
@@ -44,7 +40,12 @@ import {
 import { useReceiveStock } from "@modules/inventory/hooks/useInventory";
 import { inventoryApi } from "@modules/inventory/api/inventoryApi";
 import { productApi } from "@modules/product/api/productApi";
-import { medguideApi } from "@modules/medguide/api/medguideApi";
+import {
+  useMedicineSearch,
+  importCatalogMedicine,
+  CATALOG_PREFIX,
+  CATALOG_MIN_CHARS,
+} from "@modules/inventory/hooks/useMedicineSearch";
 import { CameraScanner } from "@shared/CameraScanner";
 import { scanFeedback } from "@shared/scanFeedback";
 import { QuickAddProduct } from "@modules/inventory/components/QuickAddProduct";
@@ -103,10 +104,6 @@ import { useAuthStore } from "@shared/store/useAuthStore";
 
 /** Stock expiring within this many days is flagged short at receiving. */
 const SHORT_EXPIRY_DAYS = 90;
-/** Marks a picker row that comes from the GLOBAL catalogue, not this store. */
-const CATALOG_PREFIX = "catalog:";
-/** Below this, a catalogue search matches too much to be worth the round trip. */
-const CATALOG_MIN_CHARS = 2;
 /** Sentinel for the row picker's last-resort "make one by hand" option. */
 const CREATE_NEW = "__create_new__";
 
@@ -152,10 +149,11 @@ export default function ReceiveStockScreen() {
   // whole: the picker searches server-side and `knownProducts` caches whatever
   // we've already resolved (scan matches + past picks).
   const [productQuery, setProductQuery] = useState("");
-  const { data: products, isFetching: productsLoading } = useProducts({
-    search: productQuery || undefined,
-    limit: 50,
-  });
+  const {
+    results: searchResults,
+    items: productItems,
+    loading: productsLoading,
+  } = useMedicineSearch(productQuery);
   const { data: locations } = useAllLocations();
   const canManageSuppliers = useAuthStore((s) => s.hasPermission)(
     "suppliers.manage",
@@ -303,39 +301,12 @@ export default function ReceiveStockScreen() {
   }, [defaultLocationId, lines.length]);
   /* eslint-enable react-hooks/set-state-in-effect */
 
-  const searchResults = useMemo<ProductLite[]>(
-    () =>
-      (products?.data || []).map((p) => ({
-        id: p.id,
-        name: p.name,
-        sku: p.sku,
-        baseUnit: p.baseUnit,
-        packs: p.packs || [],
-      })),
-    [products],
-  );
-
   /** Cache first, topped up with the live results — resolves anything on the form. */
   const productsById = useMemo(() => {
     const map: Record<string, ProductLite> = { ...knownProducts };
     for (const p of searchResults) map[p.id] = p;
     return map;
   }, [searchResults, knownProducts]);
-
-  /**
-   * The global medicine catalogue (4 lakh+ medicines), searched alongside this
-   * pharmacy's own products. A shop stocking an item for the first time
-   * shouldn't have to retype name/pack/MRP/GST/HSN that the platform already
-   * knows — picking a catalogue hit imports it in one tap (eVitalRx-style).
-   */
-  const catalogReady = productQuery.trim().length >= CATALOG_MIN_CHARS;
-  const { data: catalogHits, isFetching: catalogLoading } = useQuery({
-    queryKey: ["grn-catalog", productQuery],
-    queryFn: () => medguideApi.search({ search: productQuery, limit: 8 }),
-    enabled: catalogReady,
-    // A given search over a 4-lakh-row catalogue doesn't change during a GRN.
-    staleTime: 5 * 60 * 1000,
-  });
 
   /**
    * True while any part of the answer is still coming — including the debounce
@@ -345,32 +316,7 @@ export default function ReceiveStockScreen() {
    * duplicate product. Silence is not a negative result.
    */
   const searching =
-    productsLoading ||
-    catalogLoading ||
-    activeQuery.trim() !== productQuery.trim();
-
-  // Keyboard-first "add a line" search — filling the first blank line, else
-  // appending. Mirrors the POS add-bar so building a multi-line GRN is fast.
-  const productItems = useMemo(() => {
-    const mine = searchResults.map((p) => ({
-      value: p.id,
-      label: p.name,
-      sublabel: p.sku,
-    }));
-    // Only offer catalogue entries this store doesn't already stock.
-    const haveSku = new Set(searchResults.map((p) => p.sku));
-    const fromCatalog = (catalogHits?.data || [])
-      .filter((m) => !haveSku.has(m.sku))
-      .map((m) => ({
-        value: `${CATALOG_PREFIX}${m._id}`,
-        label: m.name,
-        sublabel: [m.saltComposition, m.manufacturerName]
-          .filter(Boolean)
-          .join(" · "),
-        right: "+ Catalogue",
-      }));
-    return [...mine, ...fromCatalog];
-  }, [searchResults, catalogHits]);
+    productsLoading || activeQuery.trim() !== productQuery.trim();
 
   /**
    * The row picker's list: everything the top bar offers, plus creating one by
@@ -428,15 +374,7 @@ export default function ReceiveStockScreen() {
     catalogId: string,
     returnExisting = false,
   ): Promise<ProductLite> => {
-    const created = await medguideApi.addToStore(catalogId, { returnExisting });
-    const full = await productApi.get(created.id);
-    const lite: ProductLite = {
-      id: full.id,
-      name: full.name,
-      sku: full.sku,
-      baseUnit: full.baseUnit,
-      packs: full.packs || [],
-    };
+    const lite = await importCatalogMedicine(catalogId, returnExisting);
     setKnownProducts((cur) => ({ ...cur, [lite.id]: lite }));
     return lite;
   };

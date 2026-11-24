@@ -63,7 +63,7 @@ export const productApi = {
     );
     return res.data.data;
   },
-  update: async (id: string, payload: ProductPayload) => {
+  update: async (id: string, payload: Partial<ProductPayload>) => {
     const res = await apiClient.patch<{ success: boolean; data: Product }>(
       `/products/${id}`,
       payload,

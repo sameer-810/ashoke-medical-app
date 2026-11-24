@@ -21,6 +21,11 @@ import { Text, VStack, HStack, Button, StatusChip } from "@shared/ui";
 interface Props {
   onPicked: (match: PackBatchMatch) => void;
   onClose: () => void;
+  /**
+   * Hands back the whole read instead of resolving it to a lot in stock. For
+   * adding stock, where the batch on the pack is usually one not stocked yet.
+   */
+  onRead?: (res: PackRead) => void;
 }
 
 /**
@@ -35,7 +40,7 @@ interface Props {
  * sell from the wrong lot — wrong expiry, wrong MRP, wrong stock decremented.
  * A second of confirmation is cheaper than that.
  */
-export function PackTextScanner({ onPicked, onClose }: Props) {
+export function PackTextScanner({ onPicked, onClose, onRead }: Props) {
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef<CameraView>(null);
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -49,6 +54,11 @@ export function PackTextScanner({ onPicked, onClose }: Props) {
     setError(null);
     try {
       const res = await ocrApi.readPack({ uri, name: "pack.jpg", mimeType });
+      if (onRead) {
+        scanFeedback(res.read.batchNumber ? "ok" : "warn");
+        onRead(res);
+        return;
+      }
       setResult(res);
       // An exact hit needs no decision — take it and get out of the way.
       if (res.match) {

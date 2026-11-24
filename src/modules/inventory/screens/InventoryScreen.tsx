@@ -6,7 +6,9 @@ import {
   PackageX,
   ChevronRight,
   CalendarSearch,
+  PackagePlus,
 } from "lucide-react-native";
+import { AddStockModal } from "@modules/inventory/components/AddStockModal";
 import { useStock, useStockValue } from "@modules/inventory/hooks/useInventory";
 import { useStopReordering } from "@modules/product/hooks/useProducts";
 import { useAuthStore } from "@shared/store/useAuthStore";
@@ -42,6 +44,10 @@ export default function InventoryScreen() {
   const [filter, setFilter] = useState("all");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(50);
+  const [addingStock, setAddingStock] = useState(false);
+  const canAddStock = useAuthStore((s) => s.hasPermission)(
+    PERMISSIONS.STOCK_INWARD_MANAGE,
+  );
 
   // Debounce — don't run a stock search on every keystroke.
   useEffect(() => {
@@ -234,21 +240,34 @@ export default function InventoryScreen() {
       // "Which batch, expiring when" is a question about the stock you're
       // already looking at — so it opens from here rather than from the nav.
       right={
-        <Button
-          label="Batch & expiry"
-          variant="secondary"
-          fullWidth={false}
-          icon={
-            <CalendarSearch
-              size={18}
-              color={palette.text.primary}
-              strokeWidth={1.9}
+        <HStack gap={8}>
+          {canAddStock ? (
+            <Button
+              label="Add stock"
+              fullWidth={false}
+              icon={<PackagePlus size={18} color="#FFFFFF" strokeWidth={1.9} />}
+              onPress={() => setAddingStock(true)}
             />
-          }
-          onPress={() => navigation.navigate("Search")}
-        />
+          ) : null}
+          <Button
+            label="Batch & expiry"
+            variant="secondary"
+            fullWidth={false}
+            icon={
+              <CalendarSearch
+                size={18}
+                color={palette.text.primary}
+                strokeWidth={1.9}
+              />
+            }
+            onPress={() => navigation.navigate("Search")}
+          />
+        </HStack>
       }
     >
+      {addingStock ? (
+        <AddStockModal onClose={() => setAddingStock(false)} />
+      ) : null}
       {/* One panel, three figures. The first of these used to be a solid green
           card beside two white ones — a filled brand-colour surface makes one
           metric shout at the reader for no reason other than being first. */}
